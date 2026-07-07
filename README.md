@@ -1,6 +1,6 @@
 # 📍 Vayusense: Surface AQI & HCHO Hotspot Intelligence Portal
 
-Vayusense is a state-of-the-art geospatial and deep learning analytics platform built for the **Development of Surface AQI & Identification of HCHO Hotspots over India using Satellite Data**. Developed under the scientific context of the Space Applications Centre (**ISRO SAC**), Ahmedabad, it fuses multi-sensor spaceborne observations with ground monitoring networks to diagnose, predict, and analyze air quality parameters.
+Vayusense is a production-grade production React + FastAPI environmental intelligence platform built for the **Development of Surface AQI & Identification of HCHO Hotspots over India using Satellite Data**. Developed under the scientific context of the Space Applications Centre (**ISRO SAC**), Ahmedabad, it fuses multi-sensor spaceborne observations with ground monitoring networks to diagnose, predict, and analyze air quality parameters.
 
 ---
 
@@ -18,7 +18,7 @@ Vayusense is a state-of-the-art geospatial and deep learning analytics platform 
 
 ---
 
-## 📐 Scientific Architecture
+## 📐 Production Architecture
 
 ```mermaid
 graph TD
@@ -26,10 +26,9 @@ graph TD
     B[Sentinel-5P TROPOMI] -->|Gas Columns| D
     C[NASA FIRMS / ERA5] -->|Fires & Wind| D
     D -->|Spatio-Temporal Patches| E[CNN-LSTM Predictor]
-    E -->|Surface Estimates| F[Vayusense API Server]
+    E -->|Surface Estimates| F[FastAPI Production Server]
     G[CPCB Ground Stations] -->|Validation Controls| F
     F -->|Telemetry Feeds| H[React Web UI]
-    F -->|Scientific Analytics| I[Streamlit Dashboard]
 ```
 
 ---
@@ -41,8 +40,6 @@ graph TD
 │   ├── cnn_lstm.py         # CNN-LSTM network architecture and training scripts
 │   ├── model_checkpoint.h5 # Trained weights archive
 │   └── data_pipeline.py    # Resampling, quality filtering, and spatial matching
-├── dashboard/              # Scientific Analytics Platform
-│   └── app.py              # Streamlit dashboard script
 ├── frontend/               # React Web Application (Vite SPA)
 │   ├── src/
 │   │   ├── components/     # Reusable UI widgets & Layout panels
@@ -52,6 +49,7 @@ graph TD
 │   └── vite.config.js
 ├── server.py               # FastAPI backend router & simulation telemetry
 ├── requirements.txt        # Python package manifests
+├── render.yaml             # Render deployment blueprint config
 └── README.md               # System documentation
 ```
 
@@ -64,24 +62,19 @@ graph TD
 *   Node.js (v18 or higher)
 *   npm or yarn
 
-### 1. Backend API & Scientific Dashboard Setup
+### 1. Backend FastAPI Gateway
 1.  Clone the repository and navigate to the project root directory.
 2.  Install the required Python packages:
     ```bash
     pip install -r requirements.txt
     ```
-3.  Start the FastAPI telemetry server:
+3.  Start the FastAPI production server:
     ```bash
     python server.py
     ```
     *The API will be available at `http://localhost:8000`.*
-4.  Run the Streamlit scientific application:
-    ```bash
-    streamlit run dashboard/app.py
-    ```
-    *The dashboard will launch at `http://localhost:8501`.*
 
-### 2. Frontend React Application Setup
+### 2. Frontend React Application
 1.  Navigate to the frontend directory:
     ```bash
     cd frontend
@@ -95,6 +88,25 @@ graph TD
     npm run dev
     ```
     *The web application will launch at `http://localhost:5174` (or `http://localhost:5173`).*
+
+---
+
+## ☁️ Production Deployment
+
+### Frontend Deployment (Vercel)
+The React frontend is configured for deployment on Vercel:
+1. Connect your GitHub repository to Vercel.
+2. Set the build folder directory to `frontend`.
+3. Build command: `npm run build`.
+4. Output directory: `dist`.
+5. Environment Variables:
+   * `VITE_API_URL`: Your deployed FastAPI backend URL (e.g., `https://vayusense-backend.onrender.com/api`).
+
+### Backend Deployment (Render)
+The FastAPI backend uses `render.yaml` for automatic deployment:
+1. Log in to Render and create a new **Blueprint** service.
+2. Select your repository.
+3. Render will auto-discover the `render.yaml` file, provisioning the web service and building using `requirements.txt`.
 
 ---
 

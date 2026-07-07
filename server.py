@@ -534,6 +534,66 @@ def location_analysis(data: LocationAnalysisRequest):
         "AI_Analysis": ai_analysis
     }
 
+# --- SPECIFIC AGGREGATED PRODUCTION ENDPOINTS ---
+@router.get("/aqi")
+def get_aqi_overview(date: str = "2026-07-07"):
+    stations = get_cpcb_stations(date)
+    trend = get_aqi_trend(date)
+    return {
+        "stations": stations,
+        "trend": trend,
+        "summary": {
+            "average_aqi": int(np.mean([s["cpcb_aqi"] for s in stations])) if stations else 0,
+            "station_count": len(stations),
+            "date": date
+        }
+    }
+
+@router.get("/hcho")
+def get_hcho_overview(date: str = "2026-07-07"):
+    hotspots = get_hotspots(date)
+    grid = get_hcho_grid(date)
+    return {
+        "hotspots": hotspots,
+        "grid": grid,
+        "summary": {
+            "hotspot_count": len(hotspots),
+            "grid_elements": len(grid),
+            "date": date
+        }
+    }
+
+@router.get("/fire")
+def get_fire_overview(date: str = "2026-07-07"):
+    fires = get_fires(date)
+    summary = get_fires_summary(date)
+    return {
+        "fires": fires,
+        "summary": summary,
+        "date": date
+    }
+
+@router.get("/weather")
+def get_weather_overview(date: str = "2026-07-07"):
+    winds = get_winds(date)
+    stats = get_transport_stats(date)
+    return {
+        "winds": winds,
+        "stats": stats,
+        "date": date
+    }
+
+@router.get("/model-performance")
+def get_model_performance_overview():
+    perf = get_model_performance()
+    loss = get_model_loss_curve()
+    residuals = get_model_residuals()
+    return {
+        "metrics": perf,
+        "loss_curve": loss,
+        "residuals": residuals
+    }
+
 app.include_router(router, prefix="/api")
 
 if __name__ == "__main__":
