@@ -1,0 +1,60 @@
+# ISRO AQI Prediction & HCHO Hotspot Project Configuration File
+
+# 1. Spatial Study Area (bounding box for India)
+spatial:
+  india_bbox: [68.0, 6.0, 97.0, 37.0]  # Min Lon, Min Lat, Max Lon, Max Lat
+  projection: "EPSG:4326"               # WGS84 coordinate reference system
+  resolution_meters: 10000              # Baseline grid resolution (10km) for predictions
+
+# 2. Temporal Range
+temporal:
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  resolution: "daily"                   # 'daily' or 'hourly'
+
+# 3. Satellite & Meteorological Sensor Settings
+sensors:
+  sentinel_5p:
+    hcho_collection: "COPERNICUS/S5P/OFFL/L3_HCHO"
+    hcho_band: "tropospheric_HCHO_column_number_density"
+    hcho_qa_band: "qa_value"
+    hcho_qa_threshold: 0.5
+    
+    no2_collection: "COPERNICUS/S5P/OFFL/L3_NO2"
+    no2_band: "tropospheric_NO2_column_number_density"
+    no2_qa_threshold: 0.75
+
+  modis:
+    aod_collection: "MODIS/061/MCD19A2_GRT_DNB_L2"
+    aod_band: "Optical_Depth_055"
+    aod_resolution_m: 1000
+
+  firms:
+    collection: "FIRMS"
+    confidence_threshold: 70
+    frp_band: "T21"                    # Fire Radiative Power proxy (K brightness)
+
+  era5:
+    collection: "ECMWF/ERA5_LAND/DAILY_RAW"
+    bands:
+      - "temperature_2m"
+      - "u_component_of_wind_10m"
+      - "v_component_of_wind_10m"
+      - "total_precipitation"
+
+# 4. Deep Learning Model Hyperparameters
+model:
+  sequence_length: 7                    # Number of temporal lag days (T=7)
+  spatial_patch_size: 11                # N x N spatial grid centered on stations (11x11)
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  model_save_path: "models/production/cnn_lstm_aqi.keras"
+  checkpoint_path: "models/checkpoint/best_weights.weights.h5"
+
+# 5. File System Directories
+paths:
+  raw_cpcb_dir: "data/raw/"
+  processed_dir: "data/processed/"
+  outputs_dir: "data/outputs/"
+  logs_dir: "logs/"
