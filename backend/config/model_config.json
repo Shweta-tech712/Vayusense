@@ -1,0 +1,7 @@
+{
+  "epochs": 10,
+  "batch_size": 16,
+  "learning_rate": 0.001,
+  "sequence_length": 7,
+  "early_stopping_patience": 5
+}

@@ -50,8 +50,8 @@ function normalizeAIResponse(data) {
   const meta = data.metadata ?? {};
   const sat  = data.satellite_features ?? {};   // populated when backend returns them
 
-  const hchoProb = pred.HCHO_probability ?? 0;
-  const hchoConc = hchoConcentrationFromProbability(hchoProb);
+  const hchoProb = pred.hcho_hotspot_probability ?? pred.HCHO_probability ?? 0;
+  const hchoConc = pred.hcho_column ?? hchoConcentrationFromProbability(hchoProb);
 
   return {
     // ── Core fields HomeView reads ───────────────────────────────────────────
@@ -84,10 +84,10 @@ function normalizeAIResponse(data) {
     },
 
     Weather: {
-      temperature: 0,                 // not in CNN response; shown as N/A
-      humidity:    0,
-      wind:        env.wind_transport ?? '—',
-      wind_speed:  0,
+      temperature: (env.available && env.temperature !== null && env.temperature !== undefined) ? env.temperature : "Data unavailable",
+      humidity:    (env.available && env.humidity !== null && env.humidity !== undefined) ? env.humidity : "Data unavailable",
+      wind:        (env.available && env.wind_direction) ? env.wind_direction : "Data unavailable",
+      wind_speed:  (env.available && env.wind_speed !== null && env.wind_speed !== undefined) ? env.wind_speed : "Data unavailable",
     },
 
     AI_Analysis: data.recommendation ?? '',

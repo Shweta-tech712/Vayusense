@@ -1,0 +1,14 @@
+{
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-31",
+  "region": "India",
+  "spatial_resolution": 0.05,
+  "product_type": "L2B_AOD",
+  "ftp_host": "ftp.mosdac.gov.in",
+  "spatial_bounds": {
+    "north": 37.6,
+    "south": 8.4,
+    "east": 97.4,
+    "west": 68.1
+  }
+}

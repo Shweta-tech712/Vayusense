@@ -9,6 +9,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
+# CNN-LSTM model serving
+try:
+    from backend.services.model_service import ModelService
+    from backend.services.prediction_service import PredictionService
+    _prediction_service: Optional["PredictionService"] = None
+    _MODEL_SERVING_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: Model serving imports failed: {e}")
+    _MODEL_SERVING_AVAILABLE = False
+
 # Add parent directory to sys.path
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
@@ -32,9 +42,16 @@ app = FastAPI(
 router = APIRouter()
 
 # Enable CORS for the React frontend
+frontend_prod_url = os.getenv("FRONTEND_PRODUCTION_URL", "*")
+origins = ["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173", "http://127.0.0.1:5174"]
+if frontend_prod_url and frontend_prod_url != "*":
+    origins.append(frontend_prod_url)
+else:
+    origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -596,11 +613,21 @@ def get_model_performance_overview():
 
 @app.on_event("startup")
 def startup_event():
+    global _prediction_service
+    # ── GEE initialisation ──
     try:
         from backend.config.gee_config import initialize_gee
         initialize_gee()
     except Exception as e:
         print(f"Startup warning: GEE initialization failed with error: {e}")
+    # ── CNN-LSTM model warm-up (load once, reuse forever) ──
+    if _MODEL_SERVING_AVAILABLE:
+        try:
+            ModelService.instance().load()
+            _prediction_service = PredictionService()
+            print("CNN-LSTM model and scaler loaded successfully at startup.")
+        except Exception as e:
+            print(f"Startup warning: CNN-LSTM model loading failed: {e}")
 
 @router.get("/system/gee-status")
 def get_gee_status():
@@ -631,6 +658,47 @@ def get_gee_status():
         "dataset_access": dataset_access,
         "sentinel5p_available": sentinel5p_available
     }
+
+# ─── CNN-LSTM Prediction Endpoint ────────────────────────────────────────────
+
+class LocationPredictRequest(BaseModel):
+    location: str
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+
+class LocationPredictResponse(BaseModel):
+    location: Dict[str, Any]
+    prediction: Dict[str, Any]
+    environment: Dict[str, Any]
+    explainability: Dict[str, Any]
+    recommendation: str
+    metadata: Dict[str, Any]
+    satellite_features: Optional[Dict[str, float]] = None
+
+@router.post("/predict/location", response_model=LocationPredictResponse)
+def predict_location(req: LocationPredictRequest):
+    """Run CNN-LSTM inference for a given Indian city, state, or lat/lon."""
+    if not _MODEL_SERVING_AVAILABLE or _prediction_service is None:
+        raise HTTPException(
+            status_code=503,
+            detail="Model serving is unavailable. "
+                   "Ensure training has completed and the server restarted."
+        )
+    try:
+        result = _prediction_service.predict(
+            location=req.location,
+            lat=req.latitude,
+            lon=req.longitude
+        )
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {e}")
 
 app.include_router(router, prefix="/api")
 

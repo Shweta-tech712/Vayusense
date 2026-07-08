@@ -1,0 +1,13 @@
+{
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-31",
+  "region": "India",
+  "satellite_source": ["MODIS", "VIIRS"],
+  "confidence_threshold": 70,
+  "spatial_bounds": {
+    "north": 37.6,
+    "south": 8.4,
+    "east": 97.4,
+    "west": 68.1
+  }
+}

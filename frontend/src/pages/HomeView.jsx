@@ -190,8 +190,12 @@ export default function HomeView() {
         },
         {
           title: 'Meteorological Weather',
-          value: `${activeLocationReport.Weather.temperature}°C`,
-          label: `Winds: ${activeLocationReport.Weather.wind_speed} m/s ${activeLocationReport.Weather.wind} · Humidity: ${activeLocationReport.Weather.humidity}%`,
+          value: activeLocationReport.Weather.temperature === "Data unavailable" 
+            ? "Data unavailable" 
+            : `${activeLocationReport.Weather.temperature}°C`,
+          label: activeLocationReport.Weather.humidity === "Data unavailable" 
+            ? "Data unavailable" 
+            : `Winds: ${activeLocationReport.Weather.wind_speed} m/s ${activeLocationReport.Weather.wind} · Humidity: ${activeLocationReport.Weather.humidity}%`,
           icon: Wind, color: 'from-teal-500/20 to-teal-600/5', borderColor: 'border-teal-500/20', path: '/transport-analysis',
           actionLabel: 'Atmospheric Vectors'
         },
@@ -494,7 +498,11 @@ export default function HomeView() {
               <div className="p-4 bg-slate-950/40 border border-slate-900 rounded-xl space-y-1.5 text-left">
                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wide block">Fire &amp; Weather Influence</span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Nearby fire count: <strong className="text-white">{activeLocationReport.Fire.nearby_fire_count}</strong> (Influence: {activeLocationReport.Fire.influence}). Winds are flowing from the <strong className="text-white">{activeLocationReport.Weather.wind}</strong> at {activeLocationReport.Weather.wind_speed} m/s, accelerating downstream advection.
+                  Nearby fire count: <strong className="text-white">{activeLocationReport.Fire.nearby_fire_count}</strong> (Influence: {activeLocationReport.Fire.influence}). 
+                  {activeLocationReport.Weather.wind_speed === "Data unavailable"
+                    ? " Wind dispersion and weather data is currently unavailable."
+                    : ` Winds are flowing from the ${activeLocationReport.Weather.wind} at ${activeLocationReport.Weather.wind_speed} m/s, accelerating downstream advection.`
+                  }
                 </p>
               </div>
 

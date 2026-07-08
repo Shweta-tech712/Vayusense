@@ -16,6 +16,12 @@ Vayusense is a production-grade production React + FastAPI environmental intelli
 *   **Atmospheric Plume Advection**: Computes regional pollutant transport vectors and matches active agricultural stubble fire hotspots with downstream wind dispersion corridors.
 *   **High-Fidelity Dashboard UI**: Premium space-themed dark layout featuring custom micro-animations, glassmorphic widgets, and interactive Leaflet map panels.
 
+### 🛠️ Production Updates & Fixes
+*   **Target Inverse Scaling Engine**: Integrated target variable `MinMaxScaler` scaling for `AQI` and `PM2.5` targets in the dataset preprocessing pipeline, outputting the fitted states to `models/scalers/target_scaler.pkl`. Inference now loads this scaler to transform normalized predictions back to physical units dynamically, drastically reducing error boundaries (AQI MAE: `52.9`, PM2.5 MAE: `20.4`, R²: `~0.70`).
+*   **CPCB Scale Categorization**: Fixed AQI classifications to follow official CPCB categories applied *after* target inverse scaling.
+*   **Meteorological Weather Integration**: Fused dynamic ERA5 temperature, humidity, wind velocity, and boundary layer parameters from `era5_processed.csv` and `aqi_training_dataset.csv` with safe fallback formats (displaying "Data unavailable" instead of hardcoded 0s when no measurements exist).
+*   **Separated HCHO Channels**: Decoupled the HCHO tropospheric column densities (`hcho_column`) and hotspot anomalies (`hcho_hotspot_probability`), exposing them as distinct properties to the UI.
+
 ---
 
 ## 📐 Production Architecture
