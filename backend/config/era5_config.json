@@ -1,0 +1,15 @@
+{
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-31",
+  "region": "India",
+  "spatial_resolution": 0.25,
+  "variables": [
+    "2m_temperature",
+    "2m_dewpoint_temperature",
+    "surface_pressure",
+    "total_precipitation",
+    "10m_u_component_of_wind",
+    "10m_v_component_of_wind",
+    "boundary_layer_height"
+  ]
+}
