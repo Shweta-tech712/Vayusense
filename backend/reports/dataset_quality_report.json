@@ -1,0 +1,25 @@
+{
+    "dataset_name": "aqi_training_dataset.csv",
+    "total_records": 180,
+    "statistics": {
+        "AQI": {
+            "min": 70.0,
+            "max": 374.0,
+            "mean": 239.11
+        },
+        "PM25": {
+            "min": 42.0,
+            "max": 217.0,
+            "mean": 117.93
+        },
+        "HCHO": {
+            "min": 0.0001922,
+            "max": 0.0002415,
+            "mean": 0.000211,
+            "range": [
+                0.0001922,
+                0.0002415
+            ]
+        }
+    }
+}

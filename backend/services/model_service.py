@@ -101,8 +101,8 @@ class ModelService:
         # Calculate HCHO column density from predicted probability
         hcho_col = float(hcho_raw * 0.004)
         
-        logger.info(f"[raw_model_prediction] Before postprocessing - AQI raw: {aqi_raw:.4f}, PM25 raw: {pm25_raw:.4f}, HCHO raw: {hcho_raw:.4f}")
-        logger.info(f"[raw_model_prediction] After inverse scale - AQI: {aqi:.1f}, PM25: {pm25:.1f}, hcho_column: {hcho_col:.6f}, hcho_hotspot_probability: {hcho_raw:.4f}")
+        logger.info(f"[MODEL_RAW_OUTPUT]\nAQI: {aqi_raw:.4f}\nPM25: {pm25_raw:.4f}\nHCHO: {hcho_raw:.4f}")
+        logger.info(f"[MODEL_FINAL_OUTPUT]\nAQI: {aqi:.1f}\nPM25: {pm25:.1f}\nHCHO: {hcho_raw:.4f}")
         
         return {
             "AQI": round(aqi, 1),

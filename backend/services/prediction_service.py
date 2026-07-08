@@ -431,7 +431,9 @@ class PredictionService:
                 "HCHO_probability":         round(hcho, 4),
                 "hcho_hotspot_probability": round(hcho, 4),
                 "hcho_column":             round(preds.get("hcho_column", 0.0), 6),
+                "hcho_column_density":     round(preds.get("hcho_column", 0.0), 6),
                 "HCHO_risk":                hcho_risk,
+                "hcho_risk":                hcho_risk,
                 "confidence_score":         confidence,
             },
             "environment": {

@@ -1,0 +1,24 @@
+{
+    "readiness_percentage": 100.0,
+    "api_status": "Ready (Packages verified)",
+    "model_status": {
+        "model_checkpoint_exists": true,
+        "feature_scaler_exists": true,
+        "target_scaler_exists": true,
+        "target_scaler_loaded": true,
+        "inverse_scaling_verified": true,
+        "prediction_range_valid": true,
+        "singleton_warmup": "Verified (Loads on Startup)"
+    },
+    "dataset_status": {
+        "training_dataset_exists": true,
+        "total_records": 180
+    },
+    "frontend_status": "Ready (Build verified)",
+    "deployment_config": {
+        "dockerfile_present": true,
+        "dockerignore_present": true,
+        "env_example_present": true
+    },
+    "timestamp": "2026-07-08T16:39:42Z"
+}

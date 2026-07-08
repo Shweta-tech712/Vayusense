@@ -1,0 +1,30 @@
+# Git & Caches
+.git/
+.gitignore
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js frontend packages & builds
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Python Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local configuration overrides & secrets
+.env
+.env.local
+credentials.json
+
+# Local telemetry files
+*.log
+backend/logs/*.log
+reports/
+backend/reports/
