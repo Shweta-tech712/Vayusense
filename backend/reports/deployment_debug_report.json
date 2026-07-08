@@ -1,0 +1,9 @@
+{
+  "frontend_commit": "5351786",
+  "vercel_commit": "5351786",
+  "root_directory": "frontend",
+  "api_url": "https://vayusense-backend.onrender.com/api",
+  "backend_status": "healthy (running)",
+  "model_loaded": true,
+  "detected_issue": "None. Local builds and routing match Vercel targets. Ensure that the Vercel project Settings are configured with Root Directory: 'frontend', Build Command: 'npm run build', Output Directory: 'dist', and the Environment Variable 'VITE_API_BASE_URL' is set to 'https://vayusense-backend.onrender.com/api'."
+}
