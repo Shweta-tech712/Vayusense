@@ -24,20 +24,6 @@ const SettingsView = lazy(() => import('./pages/SettingsView'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
-  React.useEffect(() => {
-    const env = import.meta.env.MODE;
-    const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-    console.log('--- Vayusense Deployment Debug ---');
-    console.log('Environment:', env);
-    console.log('API Base URL:', apiBase);
-    console.log('Build Version: 1.0.0');
-    
-    fetch(`${apiBase}/health`)
-      .then(res => res.json())
-      .then(data => console.log('Backend Connection Status: ONLINE', data))
-      .catch(err => console.warn('Backend Connection Status: OFFLINE', err.message));
-  }, []);
-
   return (
     <FilterProvider>
       <Router>
