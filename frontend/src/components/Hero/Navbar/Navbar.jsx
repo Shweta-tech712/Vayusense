@@ -77,7 +77,7 @@ export default function Navbar() {
         {/* Action Link & Mobile Toggle */}
         <div className="flex items-center space-x-4">
           <a 
-            href="https://github.com" 
+            href="https://github.com/Shweta-tech712/Vayusense" 
             target="_blank" 
             rel="noreferrer"
             className="hidden sm:inline-flex items-center space-x-2 border border-slate-800 hover:border-amber-500/50 bg-[#090d16]/40 hover:bg-[#0c121e]/60 px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-white transition-all duration-300 shadow-sm"
@@ -125,7 +125,7 @@ export default function Navbar() {
               })}
               <hr className="border-slate-900/60" />
               <a 
-                href="https://github.com" 
+                href="https://github.com/Shweta-tech712/Vayusense" 
                 target="_blank" 
                 rel="noreferrer"
                 className="w-full text-center py-3 border border-slate-850 hover:border-amber-500/50 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white block transition-all duration-300"
