@@ -594,6 +594,44 @@ def get_model_performance_overview():
         "residuals": residuals
     }
 
+@app.on_event("startup")
+def startup_event():
+    try:
+        from backend.config.gee_config import initialize_gee
+        initialize_gee()
+    except Exception as e:
+        print(f"Startup warning: GEE initialization failed with error: {e}")
+
+@router.get("/system/gee-status")
+def get_gee_status():
+    from backend.config.gee_config import check_gee_connection
+    conn = check_gee_connection()
+    gee_connected = conn.get("status") == "connected"
+    
+    if not gee_connected:
+        return {
+            "status": "backend_running",
+            "gee": "not_connected",
+            "reason": conn.get("reason", "Unknown error")
+        }
+        
+    dataset_access = False
+    sentinel5p_available = False
+    try:
+        import ee
+        # Check NO2
+        ee.ImageCollection("COPERNICUS/S5P/OFFL/L3_NO2").limit(1).size().getInfo()
+        dataset_access = True
+        sentinel5p_available = True
+    except Exception as e:
+        print(f"S5P Dataset access check failed: {e}")
+        
+    return {
+        "gee_connection": gee_connected,
+        "dataset_access": dataset_access,
+        "sentinel5p_available": sentinel5p_available
+    }
+
 app.include_router(router, prefix="/api")
 
 if __name__ == "__main__":

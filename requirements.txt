@@ -11,6 +11,8 @@ scikit-learn>=1.2.0
 earthengine-api>=0.1.350
 google-auth>=2.15.0
 requests>=2.28.0
+python-dotenv>=1.0.0
+geemap>=0.20.0
 
 # Deep Learning Framework
 tensorflow>=2.12.0

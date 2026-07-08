@@ -1,0 +1,26 @@
+{
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-31",
+  "region": "India",
+  "spatial_resolution": 0.25,
+  "stations": [
+    {"name": "Anand Vihar, Delhi", "lat": 28.647, "lon": 77.315, "state": "Delhi", "district": "East Delhi"},
+    {"name": "Bandra, Mumbai", "lat": 19.055, "lon": 72.842, "state": "Maharashtra", "district": "Mumbai Suburban"},
+    {"name": "Hebbal, Bengaluru", "lat": 13.035, "lon": 77.598, "state": "Karnataka", "district": "Bengaluru Urban"},
+    {"name": "Victoria, Kolkata", "lat": 22.544, "lon": 88.342, "state": "West Bengal", "district": "Kolkata"},
+    {"name": "Manali, Chennai", "lat": 13.165, "lon": 80.263, "state": "Tamil Nadu", "district": "Chennai"},
+    {"name": "Sanathnagar, Hyderabad", "lat": 17.456, "lon": 78.441, "state": "Telangana", "district": "Hyderabad"},
+    {"name": "IGIMS, Patna", "lat": 25.611, "lon": 85.093, "state": "Bihar", "district": "Patna"},
+    {"name": "Shivajinagar, Pune", "lat": 18.531, "lon": 73.849, "state": "Maharashtra", "district": "Pune"},
+    {"name": "Sector 22, Chandigarh", "lat": 30.733, "lon": 76.789, "state": "Chandigarh", "district": "Chandigarh"},
+    {"name": "Civil Lines, Lucknow", "lat": 26.847, "lon": 80.947, "state": "Uttar Pradesh", "district": "Lucknow"},
+    {"name": "Palasia, Indore", "lat": 22.719, "lon": 75.857, "state": "Madhya Pradesh", "district": "Indore"},
+    {"name": "New Rajendra Nagar, Bhopal", "lat": 23.259, "lon": 77.413, "state": "Madhya Pradesh", "district": "Bhopal"}
+  ],
+  "spatial_bounds": {
+    "north": 37.6,
+    "south": 8.4,
+    "east": 97.4,
+    "west": 68.1
+  }
+}
