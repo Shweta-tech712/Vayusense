@@ -70,7 +70,21 @@ class Sentinel5PDownloader:
         try:
             with open(self.config_path, "r") as f:
                 self.config = json.load(f)
-            logger.info(f"Loaded config from {self.config_path}")
+            
+            # Load stations from separated cpcb_stations.json configuration
+            stations_path = os.path.join(os.path.dirname(self.config_path), "cpcb_stations.json")
+            with open(stations_path, "r") as f_stn:
+                stations_data = json.load(f_stn)
+                self.config["stations"] = []
+                for s in stations_data:
+                    self.config["stations"].append({
+                        "name": s["station_name"],
+                        "lat": s["latitude"],
+                        "lon": s["longitude"],
+                        "state": s["state"],
+                        "district": s["city"]
+                    })
+            logger.info(f"Loaded config from {self.config_path} and station metadata from {stations_path}")
         except Exception as e:
             logger.error(f"Failed to load config: {e}")
             raise

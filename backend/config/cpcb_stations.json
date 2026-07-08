@@ -1,0 +1,98 @@
+[
+  {
+    "station_id": "STN_001",
+    "station_name": "Anand Vihar, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "latitude": 28.647,
+    "longitude": 77.315
+  },
+  {
+    "station_id": "STN_002",
+    "station_name": "Bandra, Mumbai",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "latitude": 19.055,
+    "longitude": 72.842
+  },
+  {
+    "station_id": "STN_003",
+    "station_name": "Hebbal, Bengaluru",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "latitude": 13.035,
+    "longitude": 77.598
+  },
+  {
+    "station_id": "STN_004",
+    "station_name": "Victoria, Kolkata",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "latitude": 22.544,
+    "longitude": 88.342
+  },
+  {
+    "station_id": "STN_005",
+    "station_name": "Manali, Chennai",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "latitude": 13.165,
+    "longitude": 80.263
+  },
+  {
+    "station_id": "STN_006",
+    "station_name": "Sanathnagar, Hyderabad",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "latitude": 17.456,
+    "longitude": 78.441
+  },
+  {
+    "station_id": "STN_007",
+    "station_name": "IGIMS, Patna",
+    "city": "Patna",
+    "state": "Bihar",
+    "latitude": 25.611,
+    "longitude": 85.093
+  },
+  {
+    "station_id": "STN_008",
+    "station_name": "Shivajinagar, Pune",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "latitude": 18.531,
+    "longitude": 73.849
+  },
+  {
+    "station_id": "STN_009",
+    "station_name": "Sector 22, Chandigarh",
+    "city": "Chandigarh",
+    "state": "Chandigarh",
+    "latitude": 30.733,
+    "longitude": 76.789
+  },
+  {
+    "station_id": "STN_010",
+    "station_name": "Civil Lines, Lucknow",
+    "city": "Lucknow",
+    "state": "Uttar Pradesh",
+    "latitude": 26.847,
+    "longitude": 80.947
+  },
+  {
+    "station_id": "STN_011",
+    "station_name": "Palasia, Indore",
+    "city": "Indore",
+    "state": "Madhya Pradesh",
+    "latitude": 22.719,
+    "longitude": 75.857
+  },
+  {
+    "station_id": "STN_012",
+    "station_name": "New Rajendra Nagar, Bhopal",
+    "city": "Bhopal",
+    "state": "Madhya Pradesh",
+    "latitude": 23.259,
+    "longitude": 77.413
+  }
+]
