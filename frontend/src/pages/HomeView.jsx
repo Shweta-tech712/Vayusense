@@ -6,7 +6,8 @@ import { useFire } from '../hooks/useFire';
 import { Spinner, EmptyState } from '../components/Common/Loader';
 import { 
   Globe, Eye, Flame, Wind, ArrowUpRight, LayoutDashboard, Search, History, Sparkles, 
-  AlertCircle, ShieldAlert, ArrowRight, Activity, Thermometer, Droplets, Heart, HelpCircle, RefreshCw
+  AlertCircle, ShieldAlert, ArrowRight, Activity, Thermometer, Droplets, Heart, HelpCircle, RefreshCw,
+  Cpu, Database, Clock, Zap
 } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, BarChart, Bar, Cell } from 'recharts';
 import { MapContainer, TileLayer, CircleMarker, Circle, Popup, useMap, useMapEvents } from 'react-leaflet';
@@ -77,7 +78,9 @@ export default function HomeView() {
     selectedCoords, setSelectedCoords,
     recentSearches,
     isAnalyzingLocation,
-    analyzeLocation
+    analyzeLocation,
+    predictionError, setPredictionError,
+    loadingPhase, currentAnalysisLocation
   } = useFilters();
 
   const [searchVal, setSearchVal] = useState('');
@@ -171,8 +174,10 @@ export default function HomeView() {
         },
         {
           title: 'HCHO Gas Column',
-          value: `${(activeLocationReport.HCHO.concentration * 100).toFixed(2)} ×10⁻²`,
-          label: `Risk level: ${activeLocationReport.HCHO.risk} ${activeLocationReport.HCHO.hotspot ? '· Hotspot Anomaly' : ''}`,
+          value: activeLocationReport._ai
+            ? `${(activeLocationReport._ai.confidence_score * 100).toFixed(0)}% Confidence`
+            : `${(activeLocationReport.HCHO.concentration * 100).toFixed(2)} ×10⁻²`,
+          label: `HCHO Risk: ${activeLocationReport.HCHO.risk}${activeLocationReport.HCHO.hotspot ? ' · Hotspot Anomaly' : ''} · Prob: ${activeLocationReport._ai ? (activeLocationReport._ai.feature_contribution ? '' : '') : ''}${(activeLocationReport.HCHO.concentration * 250).toFixed(0)}%`,
           icon: Eye, color: 'from-indigo-500/20 to-indigo-600/5', borderColor: 'border-indigo-500/20', path: '/hcho',
           actionLabel: 'Outliers Registry'
         },
@@ -351,11 +356,27 @@ export default function HomeView() {
         {isAnalyzingLocation && (
           <div className="absolute inset-0 bg-[#050811]/90 rounded-xl z-[60] flex flex-col items-center justify-center gap-3">
             <div className="w-10 h-10 border-4 border-sky-500/20 border-t-sky-500 rounded-full animate-spin" />
-            <span className="text-sm font-bold text-white uppercase tracking-wider animate-pulse">Analyzing satellite observations...</span>
-            <span className="text-xs text-slate-500 font-mono">Interrogating Sentinel-5P, INSAT-3D, and ERA5 advection grids...</span>
+            <span className="text-sm font-bold text-white uppercase tracking-wider animate-pulse">{loadingPhase}</span>
+            <span className="text-xs text-slate-500 font-mono">Analyzing: {currentAnalysisLocation}</span>
           </div>
         )}
       </div>
+
+      {/* Error Banner — shown when CNN-LSTM prediction fails */}
+      {predictionError && (
+        <div className="bg-red-950/40 border border-red-800/40 rounded-xl p-4 flex items-start gap-3">
+          <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+          <div className="flex-1">
+            <p className="text-xs font-mono text-red-300">{predictionError}</p>
+          </div>
+          <button
+            onClick={() => setPredictionError(null)}
+            className="text-slate-500 hover:text-slate-300 text-xs font-mono"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
 
       {/* 3. ENVIRONMENTAL METRICS CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -484,6 +505,121 @@ export default function HomeView() {
                   The CNN-LSTM spatio-temporal model forecasts a stabilization trend over the next 24 hours. <strong>Recommendations:</strong> Adjust ventilation systems, reduce open-air exposure during peak wind dispersion hours, and execute agricultural biomass controls to reduce regional aerosol loading.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AI CONFIDENCE + EXPLAINABILITY PANEL (CNN-LSTM results only) */}
+      {activeLocationReport?._ai && (
+        <div className="bg-[#090d16] border border-slate-900 rounded-xl p-6">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1.5 mb-4">
+            <Zap className="w-4 h-4" /> AI Model Confidence &amp; Feature Attribution
+          </h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            {/* Confidence Score */}
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">CNN-LSTM Confidence Score</span>
+                <span className="text-sm font-bold text-white">
+                  {activeLocationReport._ai.confidence_score != null
+                    ? `${(activeLocationReport._ai.confidence_score * 100).toFixed(0)}%`
+                    : 'N/A'}
+                </span>
+              </div>
+              {activeLocationReport._ai.confidence_score != null && (
+                <div className="w-full bg-slate-900 rounded-full h-2">
+                  <div
+                    className="h-2 rounded-full transition-all duration-700"
+                    style={{
+                      width: `${(activeLocationReport._ai.confidence_score * 100).toFixed(0)}%`,
+                      background: activeLocationReport._ai.confidence_score >= 0.75
+                        ? 'linear-gradient(90deg, #10b981, #34d399)'
+                        : activeLocationReport._ai.confidence_score >= 0.5
+                          ? 'linear-gradient(90deg, #f59e0b, #fbbf24)'
+                          : 'linear-gradient(90deg, #ef4444, #f87171)'
+                    }}
+                  />
+                </div>
+              )}
+              <p className="text-[10px] font-mono text-slate-500 leading-relaxed">
+                Score computed from model validation R², input completeness, and data quality.
+              </p>
+              {/* Satellite feature readout */}
+              <div className="pt-2 border-t border-slate-900 space-y-1.5">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Satellite Pollutants</span>
+                {['PM25','NO2','SO2','O3'].map(key => (
+                  <div key={key} className="flex justify-between text-[10px] font-mono">
+                    <span className="text-slate-500">{key}</span>
+                    <span className="text-white">
+                      {activeLocationReport.pollutants[key] > 0
+                        ? `${activeLocationReport.pollutants[key]} µg/m³`
+                        : '—'}
+                    </span>
+                  </div>
+                ))}
+                <div className="flex justify-between text-[10px] font-mono">
+                  <span className="text-slate-500">HCHO Probability</span>
+                  <span className="text-white">{(activeLocationReport.HCHO.concentration * 250).toFixed(1)}%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature Contribution Bars */}
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Feature Group Contribution</span>
+              {Object.entries(activeLocationReport._ai.feature_contribution ?? {}).map(([group, pct]) => (
+                <div key={group} className="space-y-1">
+                  <div className="flex justify-between text-[10px] font-mono">
+                    <span className="text-slate-400">{group}</span>
+                    <span className="text-white">{pct}%</span>
+                  </div>
+                  <div className="w-full bg-slate-900 rounded-full h-1.5">
+                    <div
+                      className="h-1.5 rounded-full bg-sky-500 transition-all duration-700"
+                      style={{ width: `${Math.min(100, pct)}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODEL SOURCE + METADATA ROW (CNN-LSTM results only) */}
+      {activeLocationReport?._ai?.metadata && (
+        <div className="bg-[#090d16] border border-slate-900 rounded-xl p-5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex items-center gap-3">
+              <Cpu className="w-4 h-4 text-sky-400" />
+              <div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">AI Model</span>
+                <span className="text-xs font-bold text-white">CNN-LSTM {activeLocationReport._ai.metadata.model_version}</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Database className="w-4 h-4 text-indigo-400" />
+              <div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Datasets Used</span>
+                <span className="text-xs text-slate-300">{activeLocationReport._ai.metadata.datasets_used?.join(' · ')}</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Clock className="w-4 h-4 text-teal-400" />
+              <div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Last Updated</span>
+                <span className="text-xs text-slate-300">
+                  {activeLocationReport._ai.metadata.timestamp
+                    ? new Date(activeLocationReport._ai.metadata.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
+                    : '—'}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+              <span className="text-[10px] font-mono text-sky-400 uppercase tracking-wider">Live AI Prediction</span>
             </div>
           </div>
         </div>
