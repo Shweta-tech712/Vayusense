@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const IS_PROD = import.meta.env.PROD === true;
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -88,7 +89,8 @@ export const apiService = {
   async getStations(date) {
     try {
       return await apiClient.get(`/stations?date=${date}`);
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       return generateMockStations(date);
     }
   },
@@ -96,7 +98,8 @@ export const apiService = {
   async getFires(date) {
     try {
       return await apiClient.get(`/fires?date=${date}`);
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       return generateMockFires();
     }
   },
@@ -104,7 +107,8 @@ export const apiService = {
   async getHCHOHotspots(date) {
     try {
       return await apiClient.get(`/hotspots?date=${date}`);
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       return generateMockHotspots();
     }
   },
@@ -112,7 +116,8 @@ export const apiService = {
   async getWindVectors(date) {
     try {
       return await apiClient.get(`/winds?date=${date}`);
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       // Return sparse mesh of wind vectors (lat, lon, u, v, speed)
       const vectors = [];
       for (let lat = 10; lat <= 35; lat += 4) {
@@ -134,7 +139,8 @@ export const apiService = {
   async getAdvectionTrajectory(date) {
     try {
       return await apiClient.get(`/trajectory?date=${date}`);
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       // Mock trajectory coords starting in Punjab going south-east towards Delhi
       return [
         [30.20, 74.80],
@@ -149,7 +155,8 @@ export const apiService = {
   async getValidationMetrics() {
     try {
       return await apiClient.get('/model/performance');
-    } catch {
+    } catch (err) {
+      if (IS_PROD) throw err;
       return {
         r2: 0.842,
         mae: 18.54,

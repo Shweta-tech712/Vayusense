@@ -42,12 +42,19 @@ app = FastAPI(
 router = APIRouter()
 
 # Enable CORS for the React frontend
-frontend_prod_url = os.getenv("FRONTEND_PRODUCTION_URL", "*")
-origins = ["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173", "http://127.0.0.1:5174"]
-if frontend_prod_url and frontend_prod_url != "*":
-    origins.append(frontend_prod_url)
-else:
-    origins = ["*"]
+frontend_prod_url = os.getenv("FRONTEND_PRODUCTION_URL")
+origins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "https://vayusense.vercel.app"
+]
+if frontend_prod_url:
+    for url in frontend_prod_url.split(","):
+        url_strip = url.strip()
+        if url_strip and url_strip not in origins:
+            origins.append(url_strip)
 
 app.add_middleware(
     CORSMiddleware,
