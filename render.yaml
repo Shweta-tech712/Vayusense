@@ -6,4 +6,10 @@ services:
     startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.0
+        value: 3.10.10
+      - key: GEE_PROJECT_ID
+        sync: false
+      - key: NASA_FIRMS_KEY
+        sync: false
+      - key: FRONTEND_PRODUCTION_URL
+        value: https://vayusense.vercel.app

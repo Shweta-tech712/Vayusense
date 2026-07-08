@@ -121,7 +121,17 @@ def get_cpcb_stations(date: str) -> List[Dict[str, Any]]:
 
 @router.get("/health")
 def health_check():
-    return {"status": "ok", "service": "ISRO Python Backend Gateway", "timestamp": datetime.datetime.now().isoformat()}
+    from backend.services.model_service import ModelService
+    from backend.services.prediction_service import PredictionService
+    p = PredictionService()
+    model_status = "loaded" if ModelService.instance().is_loaded else "not_loaded"
+    dataset_status = "available" if p._fused_df is not None else "unavailable"
+    return {
+        "status": "running",
+        "model": model_status,
+        "dataset": dataset_status,
+        "version": "1.0"
+    }
 
 @router.get("/stations")
 def get_stations(date: str = Query(..., description="Date format: YYYY-MM-DD")):

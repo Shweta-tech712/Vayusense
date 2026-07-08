@@ -1,0 +1,7 @@
+{
+    "frontend_url": "https://vayusense.vercel.app",
+    "backend_url": "https://vayusense-backend.onrender.com",
+    "model_status": "ready (CNN-LSTM & target scaler verified)",
+    "api_status": "healthy",
+    "deployment_date": "2026-07-08T16:43:00Z"
+}
