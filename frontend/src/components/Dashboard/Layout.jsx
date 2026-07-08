@@ -79,6 +79,7 @@ export default function Layout() {
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold uppercase tracking-wide text-white leading-none">Vayusense</span>
                 <span className="text-[10px] font-mono tracking-wider text-slate-400 uppercase">ISRO SAC Portal</span>
+                <span className="text-[8px] text-sky-500 font-semibold mt-1">Build Version: VayuSense Final AI Build</span>
               </div>
             )}
           </div>
