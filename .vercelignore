@@ -1,0 +1,15 @@
+requirements.txt
+pyproject.toml
+.python-version
+backend/
+models/
+datasets/
+data/
+feature_engineering/
+hotspot_detection/
+preprocessing/
+transport_analysis/
+aqi_prediction/
+tests/
+Dockerfile
+render.yaml
