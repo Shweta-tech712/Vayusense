@@ -8,5 +8,16 @@ preprocessing/
 transport_analysis/
 aqi_prediction/
 tests/
+utils/
+config/
+deployment/
+docs/
+logs/
+reports/
+server.py
+requirements.txt
+pyproject.toml
+.python-version
 Dockerfile
 render.yaml
+netlify.toml

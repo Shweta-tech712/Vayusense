@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-07-08T16:55:35.099645",
+  "total_records": 72,
+  "date_range": {
+    "start": "2023-01-01",
+    "end": "2023-01-06"
+  },
+  "variable_statistics": {
+    "temperature_mean": {
+      "min": 5.850000000000023,
+      "max": 26.850000000000023,
+      "mean": 17.183333333333355,
+      "missing": 0
+    },
+    "humidity": {
+      "min": 58.0,
+      "max": 63.0,
+      "mean": 60.5,
+      "missing": 0
+    },
+    "pressure": {
+      "min": 1006.33,
+      "max": 1012.38,
+      "mean": 1009.5633333333333,
+      "missing": 0
+    },
+    "rainfall": {
+      "min": 0.2999999999999995,
+      "max": 15.2999999999997,
+      "mean": 7.799999999999951,
+      "missing": 0
+    },
+    "wind_speed": {
+      "min": 2.3106476311594077,
+      "max": 2.993661129364349,
+      "mean": 2.6513099156394047,
+      "missing": 0
+    },
+    "boundary_layer_height": {
+      "min": 833.0,
+      "max": 1238.0,
+      "mean": 1032.1666666666667,
+      "missing": 0
+    }
+  },
+  "status": "Validated"
+}

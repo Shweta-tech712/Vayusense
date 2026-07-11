@@ -1,0 +1,41 @@
+{
+  "dataset_version": "v1.0.0",
+  "generation_date": "2026-07-08 19:50:51",
+  "input_features": [
+    "NO2",
+    "SO2",
+    "CO",
+    "O3",
+    "HCHO",
+    "AOD",
+    "temperature_mean",
+    "humidity",
+    "rainfall",
+    "wind_speed",
+    "wind_direction",
+    "boundary_layer_height",
+    "fire_count",
+    "FRP",
+    "fire_severity_index",
+    "transport_influence_score",
+    "season",
+    "day_of_year",
+    "AQI_lag_1",
+    "AQI_lag_3",
+    "PM25_lag_1"
+  ],
+  "output_targets": [
+    "AQI",
+    "PM25",
+    "HCHO_hotspot_probability"
+  ],
+  "sequence_length": 7,
+  "split_info": {
+    "train_samples": 76,
+    "test_samples": 20,
+    "train_date_start": "2023-01-08",
+    "train_date_end": "2023-01-14",
+    "test_date_start": "2023-01-14",
+    "test_date_end": "2023-01-15"
+  }
+}

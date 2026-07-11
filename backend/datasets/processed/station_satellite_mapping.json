@@ -1,0 +1,110 @@
+[
+  {
+    "station_id": "STN_001",
+    "station_name": "Anand Vihar, Delhi",
+    "station_latitude": 28.647,
+    "station_longitude": 77.315,
+    "matched_pixel_latitude": 28.647,
+    "matched_pixel_longitude": 77.315,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_002",
+    "station_name": "Bandra, Mumbai",
+    "station_latitude": 19.055,
+    "station_longitude": 72.842,
+    "matched_pixel_latitude": 19.055,
+    "matched_pixel_longitude": 72.842,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_003",
+    "station_name": "Hebbal, Bengaluru",
+    "station_latitude": 13.035,
+    "station_longitude": 77.598,
+    "matched_pixel_latitude": 13.035,
+    "matched_pixel_longitude": 77.598,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_004",
+    "station_name": "Victoria, Kolkata",
+    "station_latitude": 22.544,
+    "station_longitude": 88.342,
+    "matched_pixel_latitude": 22.544,
+    "matched_pixel_longitude": 88.342,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_005",
+    "station_name": "Manali, Chennai",
+    "station_latitude": 13.165,
+    "station_longitude": 80.263,
+    "matched_pixel_latitude": 13.165,
+    "matched_pixel_longitude": 80.263,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_006",
+    "station_name": "Sanathnagar, Hyderabad",
+    "station_latitude": 17.456,
+    "station_longitude": 78.441,
+    "matched_pixel_latitude": 17.456,
+    "matched_pixel_longitude": 78.441,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_007",
+    "station_name": "IGIMS, Patna",
+    "station_latitude": 25.611,
+    "station_longitude": 85.093,
+    "matched_pixel_latitude": 25.611,
+    "matched_pixel_longitude": 85.093,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_008",
+    "station_name": "Shivajinagar, Pune",
+    "station_latitude": 18.531,
+    "station_longitude": 73.849,
+    "matched_pixel_latitude": 18.531,
+    "matched_pixel_longitude": 73.849,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_009",
+    "station_name": "Sector 22, Chandigarh",
+    "station_latitude": 30.733,
+    "station_longitude": 76.789,
+    "matched_pixel_latitude": 30.733,
+    "matched_pixel_longitude": 76.789,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_010",
+    "station_name": "Civil Lines, Lucknow",
+    "station_latitude": 26.847,
+    "station_longitude": 80.947,
+    "matched_pixel_latitude": 26.847,
+    "matched_pixel_longitude": 80.947,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_011",
+    "station_name": "Palasia, Indore",
+    "station_latitude": 22.719,
+    "station_longitude": 75.857,
+    "matched_pixel_latitude": 22.719,
+    "matched_pixel_longitude": 75.857,
+    "distance_km": 0.0
+  },
+  {
+    "station_id": "STN_012",
+    "station_name": "New Rajendra Nagar, Bhopal",
+    "station_latitude": 23.259,
+    "station_longitude": 77.413,
+    "matched_pixel_latitude": 23.259,
+    "matched_pixel_longitude": 77.413,
+    "distance_km": 0.0
+  }
+]

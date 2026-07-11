@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-07-08T16:12:17.102596",
+  "pipeline": "INSAT-3D Aerosol Optical Depth Preprocessing Portal",
+  "date_coverage": {
+    "start": "2023-01-01",
+    "end": "2023-01-07",
+    "total_days": 7
+  },
+  "spatial_coverage": {
+    "study_stations_count": 12
+  },
+  "pixels": {
+    "total_processed": 84,
+    "missing_or_cloud_pixels": 1,
+    "cloud_fraction": 0.011904761904761904
+  },
+  "AOD_statistics": {
+    "min": 0.15,
+    "max": 1.2,
+    "mean": 0.6698795180722892
+  },
+  "status": "Validated"
+}

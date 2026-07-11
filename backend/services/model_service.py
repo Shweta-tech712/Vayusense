@@ -128,7 +128,7 @@ class ModelService:
                 "Run backend/training/train_cnn_lstm.py first."
             )
         import tensorflow as tf
-        self._model = tf.keras.models.load_model(MODEL_PATH)
+        self._model = tf.keras.models.load_model(MODEL_PATH, compile=False)
         logger.info(f"Loaded Keras model from {MODEL_PATH}")
 
     def _load_scaler(self):

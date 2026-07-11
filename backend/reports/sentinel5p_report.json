@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-07-08T16:02:09.604239",
+  "pipeline": "Sentinel-5P Raw Dataset Downloader",
+  "date_range": {
+    "start": "2023-01-01",
+    "end": "2023-01-07"
+  },
+  "statistics": {
+    "NO2": {
+      "records_extracted": 84,
+      "days_covered": 7,
+      "missing_values": 0,
+      "min_value": 0.00013580000000000002,
+      "max_value": 0.00017350000000000002
+    }
+  },
+  "status": "Success"
+}
