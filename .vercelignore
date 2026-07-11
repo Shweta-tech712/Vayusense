@@ -1,6 +1,3 @@
-requirements.txt
-pyproject.toml
-.python-version
 backend/
 models/
 datasets/
