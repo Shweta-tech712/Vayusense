@@ -389,6 +389,7 @@ Surface AQI estimation is modeled as a non-linear regression problem. We use a h
 ### 8.2 Mathematical Formulation of the LSTM Cell
 For a given input vector **x**<sub>*t*</sub> at time step *t*, with hidden state **h**<sub>*t*-1</sub> and cell state **C**<sub>*t*-1</sub> from the previous step, the internal LSTM calculations are defined as follows:
 
+<div>
 $$
 \begin{aligned}
 \mathbf{f}_t &= \sigma(\mathbf{W}_f \mathbf{x}_t + \mathbf{U}_f \mathbf{h}_{t-1} + \mathbf{b}_f) \\
@@ -399,14 +400,17 @@ $$
 \mathbf{h}_t &= \mathbf{o}_t \odot \tanh(\mathbf{C}_t)
 \end{aligned}
 $$
+</div>
 
 Where **&sigma;** is the sigmoid activation function, **&odot;** represents element-wise multiplication, and **W**, **U**, **b** are the learnable weight matrices, recurrent weight matrices, and bias vectors respectively.
 
 ### 8.3 Training Pipeline Specifications
 * **Loss Function**: Mean Squared Error (MSE) with L<sub>2</sub> regularization to prevent model overfitting:
+<div>
 $$
 \mathcal{L}(\mathbf{w}) = \frac{1}{N}\sum_{j=1}^{N} (y_j - \hat{y}_j)^2 + \lambda \sum_{k} w_k^2
 $$
+</div>
 * **Optimizer**: Adam (Adaptive Moment Estimation) with an initial learning rate &alpha; = 0.001, &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999, and &epsilon; = 10<sup>-7</sup>.
 * **Hyperparameters**:
   * **Batch Size**: 64
