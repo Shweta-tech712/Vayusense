@@ -387,29 +387,31 @@ Surface AQI estimation is modeled as a non-linear regression problem. We use a h
 * **LSTM (Temporal Sequence Memory)**: Air quality exhibits strong temporal autocorrelation; today's air quality is influenced by conditions over the preceding days. LSTMs solve the vanishing gradient problem of standard RNNs by using a cell state ($\mathbf{C}_t$) and three gating units (input, forget, output) to track long-term temporal dependencies.
 
 ### 8.2 Mathematical Formulation of the LSTM Cell
-For a given input vector $\mathbf{x}_t$ at time step $t$, with hidden state $\mathbf{h}_{t-1}$ and cell state $\mathbf{C}_{t-1}$ from the previous step:
+For a given input vector **x**<sub>*t*</sub> at time step *t*, with hidden state **h**<sub>*t*-1</sub> and cell state **C**<sub>*t*-1</sub> from the previous step, the internal LSTM calculations are defined as follows:
 
-1. **Forget Gate**: Decides which information to discard from the cell state:
-$$\mathbf{f}_t = \sigma(\mathbf{W}_f \mathbf{x}_t + \mathbf{U}_f \mathbf{h}_{t-1} + \mathbf{b}_f)$$
-2. **Input Gate**: Identifies which new information to store in the cell state:
-$$\mathbf{i}_t = \sigma(\mathbf{W}_i \mathbf{x}_t + \mathbf{U}_i \mathbf{h}_{t-1} + \mathbf{b}_i)$$
-3. **Candidate State**: Generates new candidate values for the cell state:
-$$\tilde{\mathbf{C}}_t = \tanh(\mathbf{W}_c \mathbf{x}_t + \mathbf{U}_c \mathbf{h}_{t-1} + \mathbf{b}_c)$$
-4. **Cell State Update**: Computes the new cell state:
-$$\mathbf{C}_t = \mathbf{f}_t \odot \mathbf{C}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{C}}_t$$
-5. **Output Gate**: Determines the next hidden state:
-$$\mathbf{o}_t = \sigma(\mathbf{W}_o \mathbf{x}_t + \mathbf{U}_o \mathbf{h}_{t-1} + \mathbf{b}_o)$$
-$$\mathbf{h}_t = \mathbf{o}_t \odot \tanh(\mathbf{C}_t)$$
-where $\sigma$ is the sigmoid function, $\odot$ represents element-wise multiplication, and $\mathbf{W}, \mathbf{U}, \mathbf{b}$ are learnable weights and biases.
+$$
+\begin{aligned}
+\mathbf{f}_t &= \sigma(\mathbf{W}_f \mathbf{x}_t + \mathbf{U}_f \mathbf{h}_{t-1} + \mathbf{b}_f) \\
+\mathbf{i}_t &= \sigma(\mathbf{W}_i \mathbf{x}_t + \mathbf{U}_i \mathbf{h}_{t-1} + \mathbf{b}_i) \\
+\tilde{\mathbf{C}}_t &= \tanh(\mathbf{W}_c \mathbf{x}_t + \mathbf{U}_c \mathbf{h}_{t-1} + \mathbf{b}_c) \\
+\mathbf{C}_t &= \mathbf{f}_t \odot \mathbf{C}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{C}}_t \\
+\mathbf{o}_t &= \sigma(\mathbf{W}_o \mathbf{x}_t + \mathbf{U}_o \mathbf{h}_{t-1} + \mathbf{b}_o) \\
+\mathbf{h}_t &= \mathbf{o}_t \odot \tanh(\mathbf{C}_t)
+\end{aligned}
+$$
+
+Where **&sigma;** is the sigmoid activation function, **&odot;** represents element-wise multiplication, and **W**, **U**, **b** are the learnable weight matrices, recurrent weight matrices, and bias vectors respectively.
 
 ### 8.3 Training Pipeline Specifications
-* **Loss Function**: Mean Squared Error (MSE) with L2 regularization to prevent overfitting:
-$$\mathcal{L}(\mathbf{w}) = \frac{1}{N}\sum_{j=1}^{N} (y_j - \hat{y}_j)^2 + \lambda \sum_{k} w_k^2$$
-* **Optimizer**: Adam (Adaptive Moment Estimation) with an initial learning rate $\alpha = 0.001$, $\beta_1 = 0.9$, $\beta_2 = 0.999$, and $\epsilon = 10^{-7}$.
+* **Loss Function**: Mean Squared Error (MSE) with L<sub>2</sub> regularization to prevent model overfitting:
+$$
+\mathcal{L}(\mathbf{w}) = \frac{1}{N}\sum_{j=1}^{N} (y_j - \hat{y}_j)^2 + \lambda \sum_{k} w_k^2
+$$
+* **Optimizer**: Adam (Adaptive Moment Estimation) with an initial learning rate &alpha; = 0.001, &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999, and &epsilon; = 10<sup>-7</sup>.
 * **Hyperparameters**:
-  * Batch Size: 64
-  * Epochs: 150 (with Early Stopping if validation loss does not improve for 15 consecutive epochs).
-  * Dropout Rate: 0.25 after the LSTM layer.
+  * **Batch Size**: 64
+  * **Epochs**: 150 (with Early Stopping if validation loss does not improve for 15 consecutive epochs).
+  * **Dropout Rate**: 0.25 after the LSTM layer.
 
 ---
 
