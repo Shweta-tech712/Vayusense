@@ -177,7 +177,7 @@ VayuSense addresses these limitations through three primary features:
 ```mermaid
 graph TD
     %% Data Sources
-    subgraph Data Sources
+    subgraph DS ["Data Sources"]
         S5P[Sentinel-5P TROPOMI]
         ERA5[ERA5 Meteorology]
         FIRMS[NASA FIRMS Fire Data]
@@ -185,7 +185,7 @@ graph TD
     end
 
     %% Preprocessing Pipeline
-    subgraph Data Processing Pipeline
+    subgraph DP ["Data Processing Pipeline"]
         Ingest[GEE & API Ingestion Engine]
         Reproj[Spatial Reprojection & Alignment]
         KDTree[KDTree Spatial Matcher]
@@ -194,7 +194,7 @@ graph TD
     end
 
     %% Model & Core Backend
-    subgraph Backend Core FastAPI
+    subgraph BC ["Backend Core FastAPI"]
         DLModel[CNN-LSTM Inference Model]
         SHAPEngine[SHAP Feature Attribution Engine]
         Cache[Daily GeoJSON Cache]
@@ -202,7 +202,8 @@ graph TD
     end
 
     %% Client Frontend
-    subgraph User Interface React
+    subgraph UI ["User Interface React"]
+        Dashboard[Dashboard State Manager]
         Leaflet[Leaflet Interactive Map]
         Charts[Recharts Analytics]
         StatsPanel[AQI Metric Panel]
@@ -225,10 +226,10 @@ graph TD
     SHAPEngine --> API
     Cache --> API
 
-    API -->|REST/JSON| User Interface React
-    User Interface React --> Leaflet
-    User Interface React --> Charts
-    User Interface React --> StatsPanel
+    API -->|REST/JSON| Dashboard
+    Dashboard --> Leaflet
+    Dashboard --> Charts
+    Dashboard --> StatsPanel
 ```
 
 ### 5.1 Step-by-Step Architectural Workflow
