@@ -1,7 +1,6 @@
 # VayuSense: Development of Surface Air Quality Index (AQI) and Identification of Formaldehyde (HCHO) Hotspots over India using Satellite Data and Artificial Intelligence
 
 ## A Comprehensive Technical and Academic Project Report
-**Submitted for: Smart India Hackathon (SIH) | Engineering Major Project | Research Publication | Technical Documentation**
 
 ---
 
