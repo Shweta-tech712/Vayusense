@@ -405,12 +405,16 @@ $$
 Where **&sigma;** is the sigmoid activation function, **&odot;** represents element-wise multiplication, and **W**, **U**, **b** are the learnable weight matrices, recurrent weight matrices, and bias vectors respectively.
 
 ### 8.3 Training Pipeline Specifications
-* **Loss Function**: Mean Squared Error (MSE) with L<sub>2</sub> regularization to prevent model overfitting:
+
+#### Loss Function
+The model is optimized using Mean Squared Error (MSE) with L<sub>2</sub> regularization to prevent overfitting:
 <div>
 $$
 \mathcal{L}(\mathbf{w}) = \frac{1}{N}\sum_{j=1}^{N} (y_j - \hat{y}_j)^2 + \lambda \sum_{k} w_k^2
 $$
 </div>
+
+#### Optimizer and Hyperparameters
 * **Optimizer**: Adam (Adaptive Moment Estimation) with an initial learning rate &alpha; = 0.001, &beta;<sub>1</sub> = 0.9, &beta;<sub>2</sub> = 0.999, and &epsilon; = 10<sup>-7</sup>.
 * **Hyperparameters**:
   * **Batch Size**: 64
