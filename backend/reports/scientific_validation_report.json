@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-07-11T20:26:53.612484",
+  "scientific_framework": "Surface AQI Prediction & HCHO Hotspot Detection using Satellite Fusion Data",
+  "evaluation_metrics": {
+    "aqi": {
+      "mae": 15.504062377574831,
+      "rmse": 21.128786829457045,
+      "r2": 0.9595083831276259
+    },
+    "pm25": {
+      "mae": 7.644049629832423,
+      "rmse": 9.348385575425867,
+      "r2": 0.9715710728103004
+    },
+    "hcho": {
+      "accuracy": 0.75,
+      "precision": 0.14285714285714285,
+      "recall": 0.37333333333333335,
+      "f1_score": 0.2066420664206642,
+      "hotspot_threshold": 0.0608862224431075
+    }
+  },
+  "hcho_hotspot_threshold_methodology": {
+    "threshold_type": "Statistical dynamic percentile anomaly",
+    "formula": "mean(HCHO) + 1.5 * std(HCHO)",
+    "computed_threshold": 0.0608862224431075,
+    "mean_value": 0.05590459302325337,
+    "std_value": 0.0033210862799027533,
+    "true_negatives": 617,
+    "false_positives": 168,
+    "false_negatives": 47,
+    "true_positives": 28
+  },
+  "data_integration_validation": {
+    "spatial_joining": "KDTree coordinates mapping",
+    "temporal_joining": "Daily record alignment",
+    "data_completeness": "100.0% (zero missing/synthetic rows in processed sets)"
+  }
+}

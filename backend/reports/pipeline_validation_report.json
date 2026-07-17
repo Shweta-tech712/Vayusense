@@ -1,0 +1,14 @@
+{
+    "official_dataset": true,
+    "download": true,
+    "preprocessing": true,
+    "processed_dataset": true,
+    "dataset_fusion": true,
+    "cnn_lstm_training": true,
+    "prediction": true,
+    "dashboard": true,
+    "shortcuts_found": [
+        "NASA FIRMS is not yet live integrated into prediction (Historical Fallback used).",
+        "INSAT-3D AOD live retrieval is missing (Uses fallback)."
+    ]
+}

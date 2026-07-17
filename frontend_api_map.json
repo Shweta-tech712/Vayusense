@@ -1,0 +1,43 @@
+{
+  "apiService.js": [
+    "GET /stations?date={date}",
+    "GET /fires?date={date}",
+    "GET /hotspots?date={date}",
+    "GET /winds?date={date}",
+    "GET /trajectory?date={date}",
+    "GET /model-performance"
+  ],
+  "aqiApi.js": [
+    "GET /stations?date={date}",
+    "GET /aqi/predict?date={date}",
+    "GET /aqi/trend?date={date}&station={station}"
+  ],
+  "predictionApi.js": [
+    "POST /predict/location (payload: location, latitude, longitude)"
+  ],
+  "fireApi.js": [
+    "GET /fires?date={date}&min_frp={minFRP}",
+    "GET /fires/monthly?year={year}",
+    "GET /fires/summary?date={date}"
+  ],
+  "analyticsApi.js": [
+    "GET /analytics/scatter?date={date}&n={n}",
+    "GET /analytics/correlation?date={date}",
+    "GET /analytics/distribution?date={date}"
+  ],
+  "transportApi.js": [
+    "GET /winds?date={date}&pressure={pressure}",
+    "GET /trajectory?date={date}&lat={lat}&lon={lon}&hours={hours}",
+    "GET /transport/stats?date={date}"
+  ],
+  "hchoApi.js": [
+    "GET /hotspots?date={date}&threshold={threshold}",
+    "GET /hcho/grid?date={date}",
+    "GET /hcho/seasonal?year={year}"
+  ],
+  "modelApi.js": [
+    "GET /model/performance",
+    "GET /model/loss-curve",
+    "GET /model/residuals?n={n}"
+  ]
+}

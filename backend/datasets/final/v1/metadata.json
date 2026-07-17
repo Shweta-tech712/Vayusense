@@ -1,6 +1,6 @@
 {
   "dataset_version": "v1.0.0",
-  "generation_date": "2026-07-08 19:50:51",
+  "generation_date": "2026-07-11 20:24:28",
   "input_features": [
     "NO2",
     "SO2",
@@ -31,11 +31,11 @@
   ],
   "sequence_length": 7,
   "split_info": {
-    "train_samples": 76,
-    "test_samples": 20,
+    "train_samples": 3436,
+    "test_samples": 860,
     "train_date_start": "2023-01-08",
-    "train_date_end": "2023-01-14",
-    "test_date_start": "2023-01-14",
-    "test_date_end": "2023-01-15"
+    "train_date_end": "2023-10-21",
+    "test_date_start": "2023-10-21",
+    "test_date_end": "2023-12-31"
   }
 }

@@ -1,0 +1,46 @@
+[
+    {
+        "city": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209,
+        "era5_temperature": 28.18,
+        "om_temperature": 35.0,
+        "era5_humidity": 90.3,
+        "om_humidity": 55,
+        "era5_wind_speed": 1.3,
+        "om_wind_speed": 8.9
+    },
+    {
+        "city": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777,
+        "era5_temperature": 27.11,
+        "om_temperature": null,
+        "era5_humidity": 91.73,
+        "om_humidity": null,
+        "era5_wind_speed": 9.22,
+        "om_wind_speed": null
+    },
+    {
+        "city": "Pune",
+        "latitude": 18.5204,
+        "longitude": 73.8567,
+        "era5_temperature": 23.15,
+        "om_temperature": 29.0,
+        "era5_humidity": 95.86,
+        "om_humidity": 64,
+        "era5_wind_speed": 6.63,
+        "om_wind_speed": 22.8
+    },
+    {
+        "city": "Bengaluru",
+        "latitude": 12.9716,
+        "longitude": 77.5946,
+        "era5_temperature": 21.23,
+        "om_temperature": 31.6,
+        "era5_humidity": 85.23,
+        "om_humidity": 44,
+        "era5_wind_speed": 5.76,
+        "om_wind_speed": 17.2
+    }
+]

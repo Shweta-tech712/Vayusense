@@ -1,36 +1,36 @@
 {
-  "timestamp": "2026-07-08T19:50:51.090258",
+  "timestamp": "2026-07-11T20:24:28.260570",
   "pipeline": "ISRO Multi-source CNN-LSTM Dataset Fusion Engine",
-  "total_sequences_samples": 96,
+  "total_sequences_samples": 4296,
   "number_of_features": 21,
   "sequence_length": 7,
   "train_date_range": {
     "start": "2023-01-08",
-    "end": "2023-01-14"
+    "end": "2023-10-21"
   },
   "test_date_range": {
-    "start": "2023-01-14",
-    "end": "2023-01-15"
+    "start": "2023-10-21",
+    "end": "2023-12-31"
   },
   "missing_data_percentage": 0.0,
   "target_statistics": {
     "AQI": {
-      "min": 70.0,
+      "min": 8.0,
       "max": 374.0,
-      "mean": 239.11111111111111,
-      "std": 104.96330238669391
+      "mean": 148.16552511415526,
+      "std": 111.15183342642726
     },
     "PM25": {
-      "min": 42.0,
+      "min": 1.0,
       "max": 217.0,
-      "mean": 117.93333333333334,
-      "std": 55.177210703383565
+      "mean": 71.2088584474886,
+      "std": 53.79851920132951
     },
     "HCHO_hotspot_probability": {
-      "min": 0.04805,
-      "max": 0.060375,
-      "mean": 0.05285249999999834,
-      "std": 0.002842266411149826
+      "min": 0.02,
+      "max": 0.06887499999999999,
+      "mean": 0.05699304794520368,
+      "std": 0.005292676985986959
     }
   },
   "status": "Validated"

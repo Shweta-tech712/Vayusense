@@ -67,12 +67,7 @@ const BackgroundGraphics = memo(() => {
         }}
       />
 
-      {/* Slowly translating stars */}
-      <div className="bg-star absolute top-[15%] left-[20%] w-[3px] h-[3px] bg-sky-400 rounded-full blur-[1px]" />
-      <div className="bg-star absolute top-[45%] left-[75%] w-[2px] h-[2px] bg-white rounded-full opacity-60" style={{ animationDelay: '-5s', animationDuration: '30s' }} />
-      <div className="bg-star absolute top-[70%] left-[15%] w-[4px] h-[4px] bg-blue-400 rounded-full blur-[1px]" style={{ animationDelay: '-12s', animationDuration: '22s' }} />
-      <div className="bg-star absolute top-[25%] left-[80%] w-[3px] h-[3px] bg-sky-300 rounded-full blur-[0.5px]" style={{ animationDelay: '-8s', animationDuration: '28s' }} />
-      <div className="bg-star absolute top-[80%] left-[60%] w-[2px] h-[2px] bg-white rounded-full opacity-85" style={{ animationDelay: '-18s', animationDuration: '35s' }} />
+
 
     </div>
   );

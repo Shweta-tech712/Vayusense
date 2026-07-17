@@ -238,67 +238,8 @@ export function FilterProvider({ children }) {
         cleanUpRequest();
         return;
       }
-
-      // ── 2. Development fallback to legacy endpoint ───────────────────────────
-      if (!IS_PRODUCTION) {
-        console.warn(`CNN-LSTM prediction failed (${err.type}): ${err.message}. Falling back to /location-analysis in dev mode.`);
-        try {
-          const resp = await fetch(`${API_BASE}/location-analysis`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ location: name, latitude: lat, longitude: lng, date: 'current' }),
-            signal: controller.signal
-          });
-          
-          if (controller.signal.aborted) {
-            cleanUpRequest();
-            return;
-          }
-
-          if (resp.ok) {
-            const legacy = await resp.json();
-            
-            // Double check location validity
-            const fallbackLocName = legacy.location ?? '';
-            const isFallbackMatched = isPinpoint ||
-                                      fallbackLocName.toLowerCase().includes(queryNameLower) ||
-                                      queryNameLower.includes(fallbackLocName.toLowerCase());
-                                      
-            if (!isFallbackMatched) {
-              cleanUpRequest();
-              return;
-            }
-
-            setActiveLocationReport(legacy);
-
-            // Resolve coords from legacy city lookup
-            const cityCoords = {
-              "Delhi, National Capital Territory": { lat: 28.6139, lng: 77.2090 },
-              "Mumbai, Maharashtra":               { lat: 19.0760, lng: 72.8777 },
-              "Pune, Maharashtra":                 { lat: 18.5204, lng: 73.8567 },
-              "Punjab, India":                     { lat: 31.1471, lng: 75.3412 },
-              "Bengaluru, Karnataka":              { lat: 12.9716, lng: 77.5946 },
-              "Kolkata, West Bengal":              { lat: 22.5726, lng: 88.3639 },
-              "Chennai, Tamil Nadu":               { lat: 13.0827, lng: 80.2707 },
-              "Hyderabad, Telangana":              { lat: 17.3850, lng: 78.4867 },
-              "Patna, Bihar":                      { lat: 25.5941, lng: 85.1376 },
-              "Indore, Madhya Pradesh":            { lat: 22.7196, lng: 75.8577 },
-              "Bhopal, Madhya Pradesh":            { lat: 23.2599, lng: 77.4126 },
-            };
-            const coords = cityCoords[legacy.location];
-            setSelectedCoords(coords ?? { lat: lat ?? 20.5937, lng: lng ?? 78.9629 });
-          } else {
-            setPredictionError("AI analysis unavailable for this location");
-          }
-        } catch (fallbackErr) {
-          if (!controller.signal.aborted) {
-            setPredictionError("AI analysis unavailable for this location");
-          }
-        }
-      } else {
-        // ── 3. Production: show typed error, no mock data ──────────────────────
-        setPredictionError("AI analysis unavailable for this location");
-      }
+      console.error(`AI analysis failed: ${err.message}`);
+      setPredictionError("AI analysis unavailable for this location. Ensure the model has trained and the backend is running.");
     } finally {
       cleanUpRequest();
     }

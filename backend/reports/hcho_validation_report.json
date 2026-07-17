@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-07-11T20:25:14.026454",
+  "methodology": "Dynamically determined hotspot threshold: mean(HCHO) + 1.5 * std(HCHO)",
+  "mean": 0.05590459302325337,
+  "std": 0.0033210862799027533,
+  "computed_threshold": 0.0608862224431075,
+  "accuracy": 0.75,
+  "precision": 0.14285714285714285,
+  "recall": 0.37333333333333335,
+  "f1_score": 0.2066420664206642,
+  "confusion_matrix": {
+    "true_negatives": 617,
+    "false_positives": 168,
+    "false_negatives": 47,
+    "true_positives": 28
+  }
+}

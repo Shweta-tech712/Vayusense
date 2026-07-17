@@ -218,15 +218,25 @@ class CNNLSTMTrainer:
         pm25_rmse = np.sqrt(mean_squared_error(actual_pm25_phys, pred_pm25_phys))
         pm25_r2 = r2_score(actual_pm25_phys, pred_pm25_phys)
         
-        # Compute HCHO classification indicators (hotspot threshold at 0.5)
-        actual_hcho_class = (actual_hcho >= 0.5).astype(int)
-        pred_hcho_class = (pred_hcho >= 0.5).astype(int)
+        # Compute HCHO classification indicators dynamically (threshold = mean(HCHO) + 1.5 * std(HCHO))
+        hcho_mean = float(np.mean(actual_hcho))
+        hcho_std = float(np.std(actual_hcho))
+        hcho_threshold = float(hcho_mean + 1.5 * hcho_std)
+        
+        logger.info(f"[HCHO_SCIENTIFIC_REFORMULATION] Baseline mean: {hcho_mean:.6f}, std: {hcho_std:.6f}")
+        logger.info(f"[HCHO_SCIENTIFIC_REFORMULATION] Computed Hotspot Threshold: {hcho_threshold:.6f}")
+        
+        actual_hcho_class = (actual_hcho >= hcho_threshold).astype(int)
+        pred_hcho_class = (pred_hcho >= hcho_threshold).astype(int)
         
         hcho_acc = accuracy_score(actual_hcho_class, pred_hcho_class)
-        # Use zero_division=0 to handle cases where there are no predicted positives in small datasets
         hcho_prec = precision_score(actual_hcho_class, pred_hcho_class, zero_division=0)
         hcho_rec = recall_score(actual_hcho_class, pred_hcho_class, zero_division=0)
         hcho_f1 = f1_score(actual_hcho_class, pred_hcho_class, zero_division=0)
+        
+        # Confusion matrix
+        from sklearn.metrics import confusion_matrix
+        tn, fp, fn, tp = confusion_matrix(actual_hcho_class, pred_hcho_class).ravel() if len(np.unique(actual_hcho_class)) > 1 else (len(actual_hcho_class), 0, 0, 0)
         
         evaluation = {
             "aqi": {"mae": float(aqi_mae), "rmse": float(aqi_rmse), "r2": float(aqi_r2)},
@@ -235,12 +245,37 @@ class CNNLSTMTrainer:
                 "accuracy": float(hcho_acc),
                 "precision": float(hcho_prec),
                 "recall": float(hcho_rec),
-                "f1_score": float(hcho_f1)
+                "f1_score": float(hcho_f1),
+                "hotspot_threshold": hcho_threshold
             }
         }
         
         reports_dir = os.path.join(os.path.dirname(__file__), "..", "reports")
         os.makedirs(reports_dir, exist_ok=True)
+        
+        # Save hcho specific report
+        hcho_report = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "methodology": "Dynamically determined hotspot threshold: mean(HCHO) + 1.5 * std(HCHO)",
+            "mean": hcho_mean,
+            "std": hcho_std,
+            "computed_threshold": hcho_threshold,
+            "accuracy": float(hcho_acc),
+            "precision": float(hcho_prec),
+            "recall": float(hcho_rec),
+            "f1_score": float(hcho_f1),
+            "confusion_matrix": {
+                "true_negatives": int(tn),
+                "false_positives": int(fp),
+                "false_negatives": int(fn),
+                "true_positives": int(tp)
+            }
+        }
+        hcho_report_file = os.path.join(reports_dir, "hcho_validation_report.json")
+        with open(hcho_report_file, "w") as f:
+            json.dump(hcho_report, f, indent=2)
+        logger.info(f"HCHO scientific validation report saved to {hcho_report_file}")
+        
         eval_file = os.path.join(reports_dir, "model_evaluation.json")
         with open(eval_file, "w") as f:
             json.dump(evaluation, f, indent=2)

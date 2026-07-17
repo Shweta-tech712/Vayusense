@@ -2,10 +2,30 @@ import React, { useMemo, memo } from 'react';
 import { useFilters } from '../context/FilterContext';
 import { useFire } from '../hooks/useFire';
 import { Spinner, EmptyState } from '../components/Common/Loader';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import { useMap, MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import { RefreshCw, AlertTriangle, Flame } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+
+const STATE_COORDS = {
+  'All India': { center: [22.0, 79.0], zoom: 5 },
+  'Delhi': { center: [28.6139, 77.2090], zoom: 9 },
+  'Maharashtra': { center: [19.7515, 75.7139], zoom: 6 },
+  'Karnataka': { center: [15.3173, 75.7139], zoom: 6 },
+  'West Bengal': { center: [22.9868, 87.8550], zoom: 7 },
+  'Tamil Nadu': { center: [11.1271, 78.6569], zoom: 6 },
+  'Telangana': { center: [18.1124, 79.0193], zoom: 6 },
+  'Bihar': { center: [25.0961, 85.3131], zoom: 7 }
+};
+
+// Component to dynamically update map center
+function MapUpdater({ center, zoom }) {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
+}
 
 // ─── Colour by FRP intensity ──────────────────────────────────────────────────
 function getFireColor(frp) {
@@ -168,7 +188,8 @@ export default function FireAnalysisView() {
             />
           </div>
         ) : (
-          <MapContainer center={[30.0, 75.5]} zoom={7} className="w-full h-full" style={{ background: '#050811' }}>
+          <MapContainer center={STATE_COORDS[selectedState]?.center || [30.0, 75.5]} zoom={STATE_COORDS[selectedState]?.zoom || 7} className="w-full h-full" style={{ background: '#050811' }}>
+            <MapUpdater center={STATE_COORDS[selectedState]?.center || [30.0, 75.5]} zoom={STATE_COORDS[selectedState]?.zoom || 7} />
             <TileLayer
               attribution="&copy; NASA LANCE FIRMS"
               url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

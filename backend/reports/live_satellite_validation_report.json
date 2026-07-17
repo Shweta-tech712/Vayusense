@@ -1,0 +1,38 @@
+{
+    "Delhi": {
+        "no2": null,
+        "so2": 7.352107308637588e-05,
+        "co": 0.040555871080076814,
+        "o3": 0.12724206182719378,
+        "hcho": 0.0002626164939770204,
+        "acquisition_date": "2026-07-09 17:48:58 UTC",
+        "source": "Google Earth Engine (Sentinel-5P)"
+    },
+    "Mumbai": {
+        "no2": null,
+        "so2": null,
+        "co": 0.027357695930909476,
+        "o3": 0.12772767946655067,
+        "hcho": null,
+        "acquisition_date": "2026-07-09 17:48:58 UTC",
+        "source": "Google Earth Engine (Sentinel-5P)"
+    },
+    "Pune": {
+        "no2": null,
+        "so2": 8.526131584049245e-05,
+        "co": 0.027637997948399867,
+        "o3": 0.12695513916840023,
+        "hcho": 4.5993706093411115e-05,
+        "acquisition_date": "2026-07-09 17:48:58 UTC",
+        "source": "Google Earth Engine (Sentinel-5P)"
+    },
+    "Bengaluru": {
+        "no2": null,
+        "so2": null,
+        "co": 0.024093605262425582,
+        "o3": 0.12715954751756423,
+        "hcho": 7.667371312270718e-05,
+        "acquisition_date": "2026-07-09 17:48:58 UTC",
+        "source": "Google Earth Engine (Sentinel-5P)"
+    }
+}

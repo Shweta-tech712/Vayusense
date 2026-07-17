@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-07-11T20:23:36.552862",
+  "pipeline": "NASA FIRMS Fire Activity Integration Portal",
+  "total_fires": 7920,
+  "high_confidence_fires": 7920,
+  "season_analysis": {
+    "Forest Fire Season": 0,
+    "Kharif Crop Burning": 0,
+    "Off-Season": 0
+  },
+  "frp_statistics": {
+    "min": 45.0,
+    "max": 203.0,
+    "mean": 97.13131313131314
+  },
+  "missing_values": {
+    "nearest_fire_distance": 0,
+    "transport_influence_score": 0
+  },
+  "status": "Validated"
+}

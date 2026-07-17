@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFilters } from '../context/FilterContext';
 import { useAQI } from '../hooks/useAQI';
 import { useFire } from '../hooks/useFire';
+import { useHCHO } from '../hooks/useHCHO';
 import { Spinner, EmptyState } from '../components/Common/Loader';
 import { 
   Globe, Eye, Flame, Wind, ArrowUpRight, LayoutDashboard, Search, History, Sparkles, 
@@ -100,6 +101,8 @@ export default function HomeView() {
     error: fireError,
   } = useFire(analysisDate, 0, selectedState);
 
+  const { hotspots, loading: hchoLoading } = useHCHO(analysisDate, 2.0, selectedState);
+
   const loading = aqiLoading || fireLoading;
   const error   = aqiError   || fireError;
 
@@ -116,11 +119,6 @@ export default function HomeView() {
     if (stations.length === 0) return '—';
     return Math.round(stations.reduce((s, st) => s + (st.cpcb_aqi ?? 0), 0) / stations.length);
   }, [stations]);
-
-  const hotspotsCount = useMemo(
-    () => stations.filter(s => s.cpcb_aqi > 200).length,
-    [stations]
-  );
 
   const avgWindSpeed = useMemo(() => {
     const w = stations.filter(s => s.wind_speed != null);
@@ -174,10 +172,8 @@ export default function HomeView() {
         },
         {
           title: 'HCHO Gas Column',
-          value: activeLocationReport._ai
-            ? `${(activeLocationReport._ai.confidence_score * 100).toFixed(0)}% Confidence`
-            : `${(activeLocationReport.HCHO.concentration * 100).toFixed(2)} ×10⁻²`,
-          label: `HCHO Risk: ${activeLocationReport.HCHO.risk}${activeLocationReport.HCHO.hotspot ? ' · Hotspot Anomaly' : ''} · Prob: ${activeLocationReport._ai ? (activeLocationReport._ai.feature_contribution ? '' : '') : ''}${(activeLocationReport.HCHO.concentration * 250).toFixed(0)}%`,
+          value: `${(activeLocationReport.HCHO.concentration * 100).toFixed(2)} ×10⁻²`,
+          label: `HCHO Risk: ${activeLocationReport.HCHO.risk}${activeLocationReport.HCHO.hotspot ? ' · Hotspot Anomaly' : ''} · Prob: ${(activeLocationReport.HCHO.concentration * 250).toFixed(0)}%`,
           icon: Eye, color: 'from-indigo-500/20 to-indigo-600/5', borderColor: 'border-indigo-500/20', path: '/hcho',
           actionLabel: 'Outliers Registry'
         },
@@ -211,8 +207,8 @@ export default function HomeView() {
       },
       {
         title: 'HCHO Hotspots',
-        value: `${hotspotsCount} Clusters`,
-        label: 'High-AQI Stations (>200)',
+        value: `${hotspots?.length || 0} Clusters`,
+        label: 'TROPOMI DBSCAN Detected',
         icon: Eye, color: 'from-indigo-500/20 to-indigo-600/5', borderColor: 'border-indigo-500/20', path: '/hcho',
       },
       {
@@ -228,7 +224,7 @@ export default function HomeView() {
         icon: Wind, color: 'from-teal-500/20 to-teal-600/5', borderColor: 'border-teal-500/20', path: '/transport-analysis',
       },
     ];
-  }, [activeLocationReport, avgAQI, hotspotsCount, fires.length, avgWindSpeed, selectedState]);
+  }, [activeLocationReport, avgAQI, hotspots, fires.length, avgWindSpeed, selectedState]);
 
   // Dynamic pollutants graph data
   const pollutantGraphData = useMemo(() => {
@@ -243,7 +239,9 @@ export default function HomeView() {
     ];
   }, [activeLocationReport]);
 
-  if (loading) return <Spinner message="Assembling Home Dashboard Telemetry..." />;
+  if (aqiLoading || fireLoading || hchoLoading) {
+    return <Spinner message="Aggregating multi-source satellite & ground telemetry..." />;
+  }
   if (error) return (
     <EmptyState
       icon={LayoutDashboard}

@@ -1,0 +1,70 @@
+[
+    {
+        "city": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209,
+        "status": "success",
+        "is_live": true,
+        "retrieval_time": "405293ms",
+        "weather": {
+            "temperature": 28.18,
+            "humidity": 90.3,
+            "pressure": 971.76,
+            "rainfall": 6.17,
+            "wind_speed": 1.3,
+            "wind_direction": 230.95,
+            "boundary_layer_height": 933.0
+        }
+    },
+    {
+        "city": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777,
+        "status": "success",
+        "is_live": true,
+        "retrieval_time": "327475ms",
+        "weather": {
+            "temperature": 27.11,
+            "humidity": 91.73,
+            "pressure": 997.84,
+            "rainfall": 413.88,
+            "wind_speed": 9.22,
+            "wind_direction": 79.42,
+            "boundary_layer_height": 1233.0
+        }
+    },
+    {
+        "city": "Pune",
+        "latitude": 18.5204,
+        "longitude": 73.8567,
+        "status": "success",
+        "is_live": true,
+        "retrieval_time": "283957ms",
+        "weather": {
+            "temperature": 23.15,
+            "humidity": 95.86,
+            "pressure": 928.75,
+            "rainfall": 87.2,
+            "wind_speed": 6.63,
+            "wind_direction": 71.83,
+            "boundary_layer_height": 1133.0
+        }
+    },
+    {
+        "city": "Bengaluru",
+        "latitude": 12.9716,
+        "longitude": 77.5946,
+        "status": "success",
+        "is_live": true,
+        "retrieval_time": "490075ms",
+        "weather": {
+            "temperature": 21.23,
+            "humidity": 85.23,
+            "pressure": 907.38,
+            "rainfall": 0.66,
+            "wind_speed": 5.76,
+            "wind_direction": 69.52,
+            "boundary_layer_height": 1133.0
+        }
+    }
+]

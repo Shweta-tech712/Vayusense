@@ -8,7 +8,7 @@ import tensorflow as tf
 from typing import Tuple, List, Dict
 from utils.logger import setup_logger
 from preprocessing.preprocessing_pipeline import DataNormalizer
-from aqi_prediction.cnn_lstm import AQICNNLSTMModel
+from backend.aqi_prediction.cnn_lstm import AQICNNLSTMModel
 
 logger = setup_logger("model_trainer")
 

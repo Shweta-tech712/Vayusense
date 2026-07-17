@@ -2,9 +2,29 @@ import React, { memo, useMemo } from 'react';
 import { useFilters } from '../context/FilterContext';
 import { useTransport } from '../hooks/useTransport';
 import { Spinner, EmptyState } from '../components/Common/Loader';
-import { MapContainer, TileLayer, Polyline, CircleMarker, Popup } from 'react-leaflet';
-import { RefreshCw, AlertTriangle, Wind } from 'lucide-react';
+import { useMap, MapContainer, TileLayer, Polyline, CircleMarker, Popup } from 'react-leaflet';
+import { RefreshCw, AlertTriangle, Wind, Info } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
+
+const STATE_COORDS = {
+  'All India': { center: [22.0, 79.0], zoom: 5 },
+  'Delhi': { center: [28.6139, 77.2090], zoom: 7 },
+  'Maharashtra': { center: [19.7515, 75.7139], zoom: 6 },
+  'Karnataka': { center: [15.3173, 75.7139], zoom: 6 },
+  'West Bengal': { center: [22.9868, 87.8550], zoom: 6 },
+  'Tamil Nadu': { center: [11.1271, 78.6569], zoom: 6 },
+  'Telangana': { center: [18.1124, 79.0193], zoom: 6 },
+  'Bihar': { center: [25.0961, 85.3131], zoom: 6 }
+};
+
+// Component to dynamically update map center
+function MapUpdater({ center, zoom }) {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
+}
 
 // ─── Memoised wind node marker ────────────────────────────────────────────────
 const WindNode = memo(function WindNode({ w, idx }) {
@@ -149,9 +169,10 @@ export default function TransportView() {
 
       {/* 2. MAP VIEW */}
       <div className="flex-1 bg-[#090d16] border border-slate-900 rounded-xl overflow-hidden relative z-0 min-h-[350px]">
-        <MapContainer center={[26.0, 78.0]} zoom={6} className="w-full h-full" style={{ background: '#050811' }}>
+        <MapContainer center={STATE_COORDS[selectedState]?.center || [26.0, 78.0]} zoom={STATE_COORDS[selectedState]?.zoom || 6} className="w-full h-full" style={{ background: '#050811' }}>
+          <MapUpdater center={STATE_COORDS[selectedState]?.center || [26.0, 78.0]} zoom={STATE_COORDS[selectedState]?.zoom || 6} />
           <TileLayer
-            attribution="&copy; Copernicus ERA5 contributors"
+            attribution="&copy; ECMWF ERA5 & HYSPLIT"
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
 

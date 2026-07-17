@@ -25,15 +25,15 @@ def test_imports():
         from feature_engineering.feature_engineer import FeatureEngineer
         print("[OK] Feature Engineering modules imported successfully.")
         
-        from aqi_prediction.cnn_lstm import AQICNNLSTMModel
-        from aqi_prediction.train import AQIModelTrainer
-        from aqi_prediction.predict import AQIPredictor
+        from backend.aqi_prediction.cnn_lstm import AQICNNLSTMModel
+        from backend.aqi_prediction.train import AQIModelTrainer
+        from backend.aqi_prediction.predict import AQIPredictor
         print("[OK] Deep Learning modeling modules imported successfully.")
         
-        from hotspot_detection.hotspot_detector import HCHOHotspotDetector
+        from backend.hotspot_detection.hotspot_detector import HCHOHotspotDetector
         print("[OK] GIS Hotspot Detection modules imported successfully.")
         
-        from transport_analysis.wind_transport import WindTransportAnalyzer
+        from backend.transport_analysis.wind_transport import WindTransportAnalyzer
         print("[OK] Meteorological Transport modules imported successfully.")
         
         print("\nAll core modules verified successfully.")

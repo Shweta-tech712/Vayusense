@@ -49,7 +49,7 @@ export async function fetchWindVectors(date, pressure = 850) {
  * Fetch HYSPLIT-style backward air-mass trajectory path.
  * GET /api/trajectory?date=YYYY-MM-DD&lat=<float>&lon=<float>&hours=72
  */
-export async function fetchTrajectory(date, lat = 28.65, lon = 77.22, hours = 72) {
+export async function fetchTrajectory(date, lat = 31.20, lon = 74.80, hours = 72) {
   try {
     return await axiosInstance.get('/trajectory', { params: { date, lat, lon, hours } });
   } catch {

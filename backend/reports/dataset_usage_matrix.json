@@ -1,0 +1,67 @@
+[
+    {
+        "name": "CPCB Ground Air Quality",
+        "official_source": "CPCB CCR",
+        "download_method": "API / Web Scraping",
+        "downloader_script": "cpcb_downloader.py",
+        "processing_script": "cpcb_pipeline.py",
+        "config_file": "data_collection_config.json",
+        "storage_location": "datasets/processed/cpcb_processed.csv",
+        "contains_real_data": true,
+        "used_in_training": true,
+        "used_in_prediction": false,
+        "status": "Historical"
+    },
+    {
+        "name": "Sentinel-5P TROPOMI (NO2, SO2, CO, O3, HCHO)",
+        "official_source": "Google Earth Engine (COPERNICUS/S5P/OFFL/L3_*)",
+        "download_method": "GEE Python API",
+        "downloader_script": "sentinel5p_downloader.py / live_satellite_service.py",
+        "processing_script": "sentinel5p_merger.py",
+        "config_file": "satellite_config.json / gee_config.py",
+        "storage_location": "datasets/processed/sentinel5p_processed.csv / Live GEE",
+        "contains_real_data": false,
+        "used_in_training": true,
+        "used_in_prediction": true,
+        "status": "Historical & Live"
+    },
+    {
+        "name": "Meteorological Reanalysis (ERA5)",
+        "official_source": "Google Earth Engine (ECMWF/ERA5_LAND/HOURLY)",
+        "download_method": "GEE Python API",
+        "downloader_script": "era5_downloader.py / live_weather_service.py",
+        "processing_script": "dataset_fusion.py",
+        "config_file": "era5_config.json",
+        "storage_location": "datasets/processed/era5_processed.csv / Live GEE",
+        "contains_real_data": true,
+        "used_in_training": true,
+        "used_in_prediction": true,
+        "status": "Historical & Live"
+    },
+    {
+        "name": "MODIS / VIIRS Fire Data (NASA FIRMS)",
+        "official_source": "NASA FIRMS",
+        "download_method": "FIRMS API / CSV Download",
+        "downloader_script": "firms_downloader.py",
+        "processing_script": "spatial_matcher.py",
+        "config_file": "firms_config.json",
+        "storage_location": "datasets/processed/firms_processed.csv",
+        "contains_real_data": true,
+        "used_in_training": true,
+        "used_in_prediction": true,
+        "status": "Historical"
+    },
+    {
+        "name": "INSAT-3D AOD (MOSDAC)",
+        "official_source": "ISRO MOSDAC",
+        "download_method": "Web Scraping / Manual",
+        "downloader_script": "insat3d_downloader.py",
+        "processing_script": "dataset_fusion.py",
+        "config_file": "insat_config.json",
+        "storage_location": "datasets/processed/insat3d_processed.csv",
+        "contains_real_data": false,
+        "used_in_training": true,
+        "used_in_prediction": false,
+        "status": "Historical"
+    }
+]

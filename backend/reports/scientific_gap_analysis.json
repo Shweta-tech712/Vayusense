@@ -1,0 +1,16 @@
+[
+    {
+        "priority": "Critical",
+        "feature": "Live NASA FIRMS Integration",
+        "reason": "Currently FIRMS data relies on historical CSV. To predict live HCHO hotspots accurately during fire season, live active fire data must be integrated.",
+        "impact": "Prediction model will not react to new fires happening today.",
+        "solution": "Implement live_firms_service.py to query NASA FIRMS API daily."
+    },
+    {
+        "priority": "High",
+        "feature": "Live INSAT-3D AOD Integration",
+        "reason": "The model uses AOD as a feature but live prediction falls back to a default value (0.3).",
+        "impact": "Loss of accuracy in aerosol-heavy scenarios (dust storms).",
+        "solution": "Scrape or integrate live MOSDAC AOD data."
+    }
+]

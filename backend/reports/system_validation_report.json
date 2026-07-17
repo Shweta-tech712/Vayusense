@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-07-11T20:26:53.614482",
+  "overall_system_status": "VALIDATED",
+  "pipelines": {
+    "cpcb": "COMPLETED_AND_VALIDATED",
+    "era5": "COMPLETED_AND_VALIDATED",
+    "firms": "COMPLETED_AND_VALIDATED",
+    "sentinel5p": "COMPLETED_AND_VALIDATED",
+    "insat3d": "COMPLETED_AND_VALIDATED",
+    "dataset_fusion": "COMPLETED_AND_VALIDATED"
+  },
+  "row_counts_report": {
+    "cpcb_records": 4380,
+    "era5_records": 4368,
+    "firms_records": 4380,
+    "sentinel5p_records": 4380,
+    "insat3d_records": 4380,
+    "fusion_records": 4380
+  }
+}

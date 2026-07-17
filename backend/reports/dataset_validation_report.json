@@ -1,0 +1,397 @@
+{
+  "CPCB": {
+    "exists": true,
+    "row_count": 4380,
+    "columns_count": 20,
+    "column_types": {
+      "date": "object",
+      "year": "int64",
+      "month": "int64",
+      "day": "int64",
+      "day_of_year": "int64",
+      "season": "object",
+      "station_id": "object",
+      "station_name": "object",
+      "city": "object",
+      "state": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "PM25": "float64",
+      "PM10": "float64",
+      "NO2": "float64",
+      "SO2": "float64",
+      "CO": "float64",
+      "O3": "float64",
+      "AQI": "int64",
+      "data_quality_score": "float64"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 23,
+    "sample_statistics": {
+      "year": {
+        "mean": 2023.0,
+        "min": 2023.0,
+        "max": 2023.0
+      },
+      "month": {
+        "mean": 6.526027397260274,
+        "min": 1.0,
+        "max": 12.0
+      },
+      "day": {
+        "mean": 15.72054794520548,
+        "min": 1.0,
+        "max": 31.0
+      },
+      "day_of_year": {
+        "mean": 183.0,
+        "min": 1.0,
+        "max": 365.0
+      },
+      "latitude": {
+        "mean": 21.80016666666667,
+        "min": 13.035,
+        "max": 30.733
+      }
+    }
+  },
+  "ERA5": {
+    "exists": true,
+    "row_count": 4368,
+    "columns_count": 23,
+    "column_types": {
+      "date": "object",
+      "year": "int64",
+      "month": "int64",
+      "day": "int64",
+      "season": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "temperature_mean": "float64",
+      "temperature_max": "float64",
+      "temperature_min": "float64",
+      "humidity": "float64",
+      "pressure": "float64",
+      "rainfall": "float64",
+      "u_wind": "float64",
+      "v_wind": "float64",
+      "wind_speed": "float64",
+      "wind_direction": "float64",
+      "transport_u": "float64",
+      "transport_v": "float64",
+      "boundary_layer_height": "float64",
+      "temperature_lag_1": "float64",
+      "rainfall_lag_1": "float64",
+      "wind_speed_lag_1": "float64"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 0,
+    "sample_statistics": {
+      "year": {
+        "mean": 2023.0,
+        "min": 2023.0,
+        "max": 2023.0
+      },
+      "month": {
+        "mean": 6.510989010989011,
+        "min": 1.0,
+        "max": 12.0
+      },
+      "day": {
+        "mean": 15.678571428571429,
+        "min": 1.0,
+        "max": 31.0
+      },
+      "latitude": {
+        "mean": 21.800166666666666,
+        "min": 13.035,
+        "max": 30.733
+      },
+      "longitude": {
+        "mean": 78.72908333333334,
+        "min": 72.842,
+        "max": 88.342
+      }
+    }
+  },
+  "NASA FIRMS": {
+    "exists": true,
+    "row_count": 4380,
+    "columns_count": 21,
+    "column_types": {
+      "date": "object",
+      "year": "int64",
+      "month": "int64",
+      "season": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "fire_count": "int64",
+      "fire_density": "float64",
+      "FRP": "float64",
+      "average_FRP": "float64",
+      "maximum_FRP": "float64",
+      "confidence": "float64",
+      "nearest_fire_distance": "float64",
+      "fire_count_lag_1": "int64",
+      "fire_count_lag_3": "int64",
+      "FRP_lag_1": "float64",
+      "FRP_lag_3": "float64",
+      "burning_season": "object",
+      "source_region": "object",
+      "fire_severity_index": "object",
+      "transport_influence_score": "float64"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 0,
+    "sample_statistics": {
+      "year": {
+        "mean": 2023.0,
+        "min": 2023.0,
+        "max": 2023.0
+      },
+      "month": {
+        "mean": 6.526027397260274,
+        "min": 1.0,
+        "max": 12.0
+      },
+      "latitude": {
+        "mean": 21.80016666666667,
+        "min": 13.035,
+        "max": 30.733
+      },
+      "longitude": {
+        "mean": 78.72908333333334,
+        "min": 72.842,
+        "max": 88.342
+      },
+      "fire_count": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "INSAT-3D": {
+    "exists": true,
+    "row_count": 4380,
+    "columns_count": 17,
+    "column_types": {
+      "date": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "station_id": "object",
+      "AOD": "float64",
+      "source": "object",
+      "year": "int64",
+      "month": "int64",
+      "day": "int64",
+      "season": "object",
+      "AOD_lag_1": "float64",
+      "AOD_lag_3": "float64",
+      "AOD_weekly_average": "float64",
+      "humidity_corrected_AOD": "float64",
+      "aod_boundary_layer_ratio": "float64",
+      "ventilation_index": "float64",
+      "aerosol_intensity": "object"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 0,
+    "sample_statistics": {
+      "latitude": {
+        "mean": 21.80016666666667,
+        "min": 13.035,
+        "max": 30.733
+      },
+      "longitude": {
+        "mean": 78.72908333333334,
+        "min": 72.842,
+        "max": 88.342
+      },
+      "AOD": {
+        "mean": 0.35819178082191777,
+        "min": 0.28,
+        "max": 0.4599999999999999
+      },
+      "year": {
+        "mean": 2023.0,
+        "min": 2023.0,
+        "max": 2023.0
+      },
+      "month": {
+        "mean": 6.526027397260274,
+        "min": 1.0,
+        "max": 12.0
+      }
+    }
+  },
+  "Sentinel-5P": {
+    "exists": true,
+    "row_count": 4380,
+    "columns_count": 14,
+    "column_types": {
+      "date": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "state": "object",
+      "district": "object",
+      "NO2": "float64",
+      "SO2": "float64",
+      "CO": "float64",
+      "O3": "float64",
+      "HCHO": "float64",
+      "year": "int64",
+      "month": "int64",
+      "day": "int64",
+      "season": "object"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 240,
+    "sample_statistics": {
+      "latitude": {
+        "mean": 21.800166666666666,
+        "min": 13.035,
+        "max": 30.733
+      },
+      "longitude": {
+        "mean": 78.72908333333334,
+        "min": 72.842,
+        "max": 88.342
+      },
+      "NO2": {
+        "mean": 0.00016315520547945144,
+        "min": 5e-05,
+        "max": 0.0001995
+      },
+      "SO2": {
+        "mean": 0.0004481698630136898,
+        "min": 0.0001,
+        "max": 0.00056
+      },
+      "CO": {
+        "mean": 0.07222547945205478,
+        "min": 0.02,
+        "max": 0.089
+      }
+    }
+  },
+  "Fusion Dataset": {
+    "exists": true,
+    "row_count": 4380,
+    "columns_count": 66,
+    "column_types": {
+      "date": "object",
+      "year": "int64",
+      "month": "int64",
+      "day": "int64",
+      "day_of_year": "int64",
+      "season": "int64",
+      "station_id": "object",
+      "station_name": "object",
+      "city": "object",
+      "state": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "PM25": "float64",
+      "PM10": "float64",
+      "NO2": "float64",
+      "SO2": "float64",
+      "CO": "float64",
+      "O3": "float64",
+      "AQI": "int64",
+      "data_quality_score": "float64",
+      "district": "object",
+      "HCHO": "float64",
+      "AOD": "float64",
+      "source": "object",
+      "AOD_lag_1": "float64",
+      "AOD_lag_3": "float64",
+      "AOD_weekly_average": "float64",
+      "humidity_corrected_AOD": "float64",
+      "aod_boundary_layer_ratio": "float64",
+      "ventilation_index": "float64",
+      "aerosol_intensity": "int64",
+      "temperature_mean": "float64",
+      "temperature_max": "float64",
+      "temperature_min": "float64",
+      "humidity": "float64",
+      "pressure": "float64",
+      "rainfall": "float64",
+      "u_wind": "float64",
+      "v_wind": "float64",
+      "wind_speed": "float64",
+      "wind_direction": "float64",
+      "transport_u": "float64",
+      "transport_v": "float64",
+      "boundary_layer_height": "float64",
+      "temperature_lag_1": "float64",
+      "rainfall_lag_1": "float64",
+      "wind_speed_lag_1": "float64",
+      "fire_count": "int64",
+      "fire_density": "float64",
+      "FRP": "float64",
+      "average_FRP": "float64",
+      "maximum_FRP": "float64",
+      "confidence": "float64",
+      "nearest_fire_distance": "float64",
+      "fire_count_lag_1": "int64",
+      "fire_count_lag_3": "int64",
+      "FRP_lag_1": "float64",
+      "FRP_lag_3": "float64",
+      "burning_season": "object",
+      "source_region": "object",
+      "fire_severity_index": "int64",
+      "transport_influence_score": "float64",
+      "AQI_lag_1": "float64",
+      "AQI_lag_3": "float64",
+      "PM25_lag_1": "float64",
+      "HCHO_hotspot_probability": "float64"
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "coordinate_validity": "Valid",
+    "date_continuity": "Valid",
+    "outlier_points_count": 119,
+    "sample_statistics": {
+      "year": {
+        "mean": 2023.0,
+        "min": 2023.0,
+        "max": 2023.0
+      },
+      "month": {
+        "mean": 6.526027397260274,
+        "min": 1.0,
+        "max": 12.0
+      },
+      "day": {
+        "mean": 15.72054794520548,
+        "min": 1.0,
+        "max": 31.0
+      },
+      "day_of_year": {
+        "mean": 183.0,
+        "min": 1.0,
+        "max": 365.0
+      },
+      "season": {
+        "mean": 1.4219178082191781,
+        "min": 0.0,
+        "max": 3.0
+      }
+    }
+  }
+}

@@ -2,9 +2,29 @@ import React, { useMemo, memo } from 'react';
 import { useFilters } from '../context/FilterContext';
 import { useHCHO } from '../hooks/useHCHO';
 import { Spinner, EmptyState } from '../components/Common/Loader';
-import { MapContainer, TileLayer, Polygon, Popup, CircleMarker } from 'react-leaflet';
+import { useMap, MapContainer, TileLayer, Polygon, Popup, CircleMarker } from 'react-leaflet';
 import { RefreshCw, AlertTriangle, Eye } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
+
+const STATE_COORDS = {
+  'All India': { center: [22.0, 79.0], zoom: 5 },
+  'Delhi': { center: [28.6139, 77.2090], zoom: 9 },
+  'Maharashtra': { center: [19.7515, 75.7139], zoom: 6 },
+  'Karnataka': { center: [15.3173, 75.7139], zoom: 6 },
+  'West Bengal': { center: [22.9868, 87.8550], zoom: 7 },
+  'Tamil Nadu': { center: [11.1271, 78.6569], zoom: 6 },
+  'Telangana': { center: [18.1124, 79.0193], zoom: 6 },
+  'Bihar': { center: [25.0961, 85.3131], zoom: 7 }
+};
+
+// Component to dynamically update map center
+function MapUpdater({ center, zoom }) {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
+}
 
 // ─── Memoised grid point marker ───────────────────────────────────────────────
 const GridMarker = memo(function GridMarker({ pt, idx }) {
@@ -178,7 +198,8 @@ export default function HCHOHotspotsView() {
 
       {/* 2. MAP */}
       <div className="flex-1 bg-[#090d16] border border-slate-900 rounded-xl overflow-hidden relative z-0 min-h-[350px]">
-        <MapContainer center={[20.5937, 78.9629]} zoom={5} className="w-full h-full" style={{ background: '#050811' }}>
+        <MapContainer center={STATE_COORDS[selectedState]?.center || [20.5937, 78.9629]} zoom={STATE_COORDS[selectedState]?.zoom || 5} className="w-full h-full" style={{ background: '#050811' }}>
+          <MapUpdater center={STATE_COORDS[selectedState]?.center || [20.5937, 78.9629]} zoom={STATE_COORDS[selectedState]?.zoom || 5} />
           <TileLayer
             attribution="&copy; Contributors"
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"

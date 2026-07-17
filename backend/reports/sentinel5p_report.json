@@ -1,17 +1,45 @@
 {
-  "timestamp": "2026-07-08T16:02:09.604239",
+  "timestamp": "2026-07-11T20:23:43.117012",
   "pipeline": "Sentinel-5P Raw Dataset Downloader",
   "date_range": {
     "start": "2023-01-01",
-    "end": "2023-01-07"
+    "end": "2023-12-31"
   },
   "statistics": {
     "NO2": {
-      "records_extracted": 84,
-      "days_covered": 7,
+      "records_extracted": 4380,
+      "days_covered": 365,
       "missing_values": 0,
-      "min_value": 0.00013580000000000002,
-      "max_value": 0.00017350000000000002
+      "min_value": 5e-05,
+      "max_value": 0.0001995
+    },
+    "SO2": {
+      "records_extracted": 4380,
+      "days_covered": 365,
+      "missing_values": 0,
+      "min_value": 0.0001,
+      "max_value": 0.0005600000000000001
+    },
+    "CO": {
+      "records_extracted": 4380,
+      "days_covered": 365,
+      "missing_values": 0,
+      "min_value": 0.02,
+      "max_value": 0.089
+    },
+    "O3": {
+      "records_extracted": 4380,
+      "days_covered": 365,
+      "missing_values": 0,
+      "min_value": 0.12,
+      "max_value": 0.166
+    },
+    "HCHO": {
+      "records_extracted": 4380,
+      "days_covered": 365,
+      "missing_values": 0,
+      "min_value": 8e-05,
+      "max_value": 0.00027550000000000003
     }
   },
   "status": "Success"

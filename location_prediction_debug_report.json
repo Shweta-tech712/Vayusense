@@ -1,0 +1,97 @@
+{
+    "Delhi": {
+        "geocoding": {
+            "name": "Delhi",
+            "state": "Delhi NCR",
+            "latitude": 28.6139,
+            "longitude": 77.209
+        },
+        "matched_coords": [
+            28.647,
+            77.315
+        ],
+        "sequence_shape": [
+            1,
+            7,
+            21
+        ],
+        "final_aqi": 348.2,
+        "final_pm25": 189.8
+    },
+    "Mumbai": {
+        "geocoding": {
+            "name": "Mumbai",
+            "state": "Maharashtra",
+            "latitude": 19.076,
+            "longitude": 72.8777
+        },
+        "matched_coords": [
+            19.055,
+            72.842
+        ],
+        "sequence_shape": [
+            1,
+            7,
+            21
+        ],
+        "final_aqi": 115.2,
+        "final_pm25": 59.8
+    },
+    "Pune": {
+        "geocoding": {
+            "name": "Pune",
+            "state": "Maharashtra",
+            "latitude": 18.5204,
+            "longitude": 73.8567
+        },
+        "matched_coords": [
+            18.531,
+            73.849
+        ],
+        "sequence_shape": [
+            1,
+            7,
+            21
+        ],
+        "final_aqi": 120.2,
+        "final_pm25": 62.8
+    },
+    "Kochi": {
+        "geocoding": {
+            "name": "Kochi",
+            "state": "Kerala",
+            "latitude": 9.9312,
+            "longitude": 76.2673
+        },
+        "matched_coords": [
+            13.035,
+            77.598
+        ],
+        "sequence_shape": [
+            1,
+            7,
+            21
+        ],
+        "final_aqi": 72.4,
+        "final_pm25": 38.4
+    },
+    "Bengaluru": {
+        "geocoding": {
+            "name": "Bengaluru",
+            "state": "Karnataka",
+            "latitude": 12.9716,
+            "longitude": 77.5946
+        },
+        "matched_coords": [
+            13.035,
+            77.598
+        ],
+        "sequence_shape": [
+            1,
+            7,
+            21
+        ],
+        "final_aqi": 72.4,
+        "final_pm25": 38.4
+    }
+}

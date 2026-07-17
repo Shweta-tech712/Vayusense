@@ -1,0 +1,42 @@
+{
+    "Delhi": {
+        "search_lat": 28.6139,
+        "search_lon": 77.209,
+        "matched_lat": 28.647,
+        "matched_lon": 77.315,
+        "distance": 0.11104778250824586,
+        "kdtree_idx": 0
+    },
+    "Mumbai": {
+        "search_lat": 19.076,
+        "search_lon": 72.8777,
+        "matched_lat": 19.055,
+        "matched_lon": 72.842,
+        "distance": 0.04141847413896889,
+        "kdtree_idx": 10
+    },
+    "Pune": {
+        "search_lat": 18.5204,
+        "search_lon": 73.8567,
+        "matched_lat": 18.531,
+        "matched_lon": 73.849,
+        "distance": 0.013101526628603276,
+        "kdtree_idx": 11
+    },
+    "Kochi": {
+        "search_lat": 9.9312,
+        "search_lon": 76.2673,
+        "matched_lat": 13.035,
+        "matched_lon": 77.598,
+        "distance": 3.377030786060438,
+        "kdtree_idx": 8
+    },
+    "Bengaluru": {
+        "search_lat": 12.9716,
+        "search_lon": 77.5946,
+        "matched_lat": 13.035,
+        "matched_lon": 77.598,
+        "distance": 0.06349110173874725,
+        "kdtree_idx": 8
+    }
+}

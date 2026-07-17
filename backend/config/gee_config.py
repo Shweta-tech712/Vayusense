@@ -24,8 +24,23 @@ def initialize_gee():
         
     try:
         import ee
-        # Initialize with project ID as required
-        ee.Initialize(project=project_id)
+        
+        # Check if service account details are provided in environment
+        service_account_json = os.getenv("GEE_SERVICE_ACCOUNT_JSON")
+        service_account_file = os.getenv("GEE_SERVICE_ACCOUNT_FILE")
+        
+        if service_account_json:
+            logger.info("Initializing Google Earth Engine using GEE_SERVICE_ACCOUNT_JSON...")
+            credentials = ee.ServiceAccountCredentials(key_data=service_account_json)
+            ee.Initialize(credentials, project=project_id)
+        elif service_account_file:
+            logger.info(f"Initializing Google Earth Engine using GEE_SERVICE_ACCOUNT_FILE: {service_account_file}...")
+            credentials = ee.ServiceAccountCredentials(key_file=service_account_file)
+            ee.Initialize(credentials, project=project_id)
+        else:
+            logger.info("Initializing Google Earth Engine using default application/user credentials...")
+            ee.Initialize(project=project_id)
+            
         logger.info(f"Successfully initialized Google Earth Engine with project: {project_id}")
         _gee_initialized = True
         _gee_init_error = None
